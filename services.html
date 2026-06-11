@@ -426,6 +426,9 @@ html, body {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .gl-footer h2 {
@@ -475,6 +478,76 @@ html, body {
   color: var(--text-muted);
 }
 
+/* ===== ELEGANT SHAPES ===== */
+@keyframes shapeEntry1 {
+  from { opacity: 0; transform: translateY(-150px) rotate(-3deg); }
+  to   { opacity: 1; transform: translateY(0px) rotate(12deg); }
+}
+@keyframes shapeEntry2 {
+  from { opacity: 0; transform: translateY(-150px) rotate(-30deg); }
+  to   { opacity: 1; transform: translateY(0px) rotate(-15deg); }
+}
+@keyframes shapeEntry3 {
+  from { opacity: 0; transform: translateY(-150px) rotate(-23deg); }
+  to   { opacity: 1; transform: translateY(0px) rotate(-8deg); }
+}
+@keyframes shapeEntry4 {
+  from { opacity: 0; transform: translateY(-150px) rotate(5deg); }
+  to   { opacity: 1; transform: translateY(0px) rotate(20deg); }
+}
+@keyframes shapeEntry5 {
+  from { opacity: 0; transform: translateY(-150px) rotate(-40deg); }
+  to   { opacity: 1; transform: translateY(0px) rotate(-25deg); }
+}
+@keyframes shapeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(15px); }
+}
+
+.gl-shape-wrap {
+  position: absolute;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.23, 0.86, 0.39, 0.96);
+  animation-duration: 2.4s;
+  pointer-events: none;
+}
+.gl-shape-float {
+  animation: shapeFloat 12s ease-in-out infinite;
+}
+.gl-shape-pill {
+  border-radius: 9999px;
+  background: linear-gradient(to right, var(--shape-color, rgba(255,255,255,0.08)), transparent);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 2px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px 0 rgba(255,255,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.gl-shape-pill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), transparent 70%);
+}
+.gl-hero-bg-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(244,63,94,0.06) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.gl-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10,10,12,0.75) 0%, transparent 25%, transparent 75%, #0a0a0c 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .gl-sidebar { display: none; }
@@ -490,6 +563,7 @@ html, body {
   .gl-nav-links a:not(.gl-btn) { display: none; }
 }
 </style>
+<link rel="stylesheet" href="/css/animations.css"/>
 </head>
 
 <body>
@@ -509,6 +583,40 @@ html, body {
 
 <!-- HERO -->
 <section class="gl-hero">
+
+  <!-- Background glow -->
+  <div class="gl-hero-bg-glow"></div>
+
+  <!-- Elegant shapes -->
+  <div class="gl-shape-wrap" style="left:-5%;top:20%;animation-name:shapeEntry1;animation-delay:0.3s">
+    <div class="gl-shape-float">
+      <div class="gl-shape-pill" style="width:600px;height:140px;--shape-color:rgba(99,102,241,0.15)"></div>
+    </div>
+  </div>
+  <div class="gl-shape-wrap" style="right:0%;top:70%;animation-name:shapeEntry2;animation-delay:0.5s">
+    <div class="gl-shape-float" style="animation-delay:2s">
+      <div class="gl-shape-pill" style="width:500px;height:120px;--shape-color:rgba(244,63,94,0.15)"></div>
+    </div>
+  </div>
+  <div class="gl-shape-wrap" style="left:10%;bottom:10%;animation-name:shapeEntry3;animation-delay:0.4s">
+    <div class="gl-shape-float" style="animation-delay:1s">
+      <div class="gl-shape-pill" style="width:300px;height:80px;--shape-color:rgba(139,92,246,0.15)"></div>
+    </div>
+  </div>
+  <div class="gl-shape-wrap" style="right:20%;top:15%;animation-name:shapeEntry4;animation-delay:0.6s">
+    <div class="gl-shape-float" style="animation-delay:3s">
+      <div class="gl-shape-pill" style="width:200px;height:60px;--shape-color:rgba(245,158,11,0.15)"></div>
+    </div>
+  </div>
+  <div class="gl-shape-wrap" style="left:25%;top:8%;animation-name:shapeEntry5;animation-delay:0.7s">
+    <div class="gl-shape-float" style="animation-delay:4s">
+      <div class="gl-shape-pill" style="width:150px;height:40px;--shape-color:rgba(6,182,212,0.15)"></div>
+    </div>
+  </div>
+
+  <!-- Top/bottom fade overlay -->
+  <div class="gl-hero-overlay"></div>
+
   <!-- Dots animation (same lottie as homepage) -->
   <div class="gl-hero-dots">
     <div class="gl-hero-lottie"
@@ -525,7 +633,7 @@ html, body {
     ></div>
   </div>
 
-  <div class="gl-hero-content">
+  <div class="gl-hero-content" data-anim="blur">
     <h1>Glowlabs opera con tres <span class="gl-gradient">paquetes de servicio</span></h1>
     <p>Diseñamos sistemas de inteligencia artificial adaptados a cada etapa de tu negocio: captar, vender y fidelizar. Todo automatizado, todo medible.</p>
     <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
@@ -567,7 +675,7 @@ html, body {
   <div class="gl-services-content">
 
     <!-- ── SERVICE 1: CAPTACIÓN INTELIGENTE ── -->
-    <section class="gl-service-section" id="captacion">
+    <section class="gl-service-section" id="captacion" data-anim="up">
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="28" cy="28" r="27" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
@@ -591,7 +699,7 @@ html, body {
         </div>
       </div>
 
-      <div class="gl-features-grid">
+      <div class="gl-features-grid" data-stagger>
         <div class="gl-feature-item">
           <div class="gl-feature-icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
@@ -632,7 +740,7 @@ html, body {
     </section>
 
     <!-- ── SERVICE 2: VENTAS AUTOMATIZADAS ── -->
-    <section class="gl-service-section" id="ventas">
+    <section class="gl-service-section" id="ventas" data-anim="up">
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="4" y="4" width="48" height="48" rx="8" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
@@ -656,7 +764,7 @@ html, body {
         </div>
       </div>
 
-      <div class="gl-features-grid">
+      <div class="gl-features-grid" data-stagger>
         <div class="gl-feature-item">
           <div class="gl-feature-icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -697,7 +805,7 @@ html, body {
     </section>
 
     <!-- ── SERVICE 3: FIDELIZACIÓN Y RECOMPRA ── -->
-    <section class="gl-service-section" id="fidelizacion">
+    <section class="gl-service-section" id="fidelizacion" data-anim="up">
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M28 8 L48 18 L48 38 L28 48 L8 38 L8 18 Z" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" fill="none"/>
@@ -720,7 +828,7 @@ html, body {
         </div>
       </div>
 
-      <div class="gl-features-grid">
+      <div class="gl-features-grid" data-stagger>
         <div class="gl-feature-item">
           <div class="gl-feature-icon-wrap">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
@@ -765,7 +873,7 @@ html, body {
 
 <!-- FOOTER -->
 <footer class="gl-footer">
-  <div class="gl-footer-inner">
+  <div class="gl-footer-inner" data-anim="up">
     <h2>¿Listo para descubrir qué está <span class="gl-gradient">frenando tu negocio?</span></h2>
     <p>Analizamos tus procesos, identificamos dónde estás perdiendo clientes, tiempo o dinero y diseñamos un sistema con inteligencia artificial para solucionarlo.</p>
     <p>Solicita un diagnóstico estratégico y descubre cómo hacer que tu negocio venda más y funcione mejor.</p>
@@ -783,6 +891,7 @@ html, body {
 
 <!-- Webflow JS for lottie animations -->
 <script src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/js/adsorb.b8fc4c0df.js" crossorigin="anonymous"></script>
+<script src="/js/animations.js"></script>
 
 <!-- Sidebar active state on scroll -->
 <script>

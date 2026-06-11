@@ -435,6 +435,7 @@ html, body {
   .gl-team-card { width: 80vw; }
 }
 </style>
+<link rel="stylesheet" href="/css/animations.css"/>
 </head>
 <body>
 
@@ -453,7 +454,7 @@ html, body {
 
 <!-- HERO -->
 <section class="gl-hero">
-  <div class="gl-hero-content">
+  <div class="gl-hero-content" data-anim="blur">
     <p class="gl-eyebrow">Sobre GlowLabs</p>
     <h1>Construimos sistemas que ayudan a los negocios a <span class="gl-gradient">crecer.</span></h1>
     <p class="gl-hero-sub">Combinamos estrategia, inteligencia artificial, automatización y experiencia digital para ayudar a empresas a captar más clientes, vender más y operar de forma más eficiente.</p>
@@ -473,9 +474,9 @@ html, body {
 </section>
 
 <!-- FILOSOFÍA -->
-<section id="filosofia" class="gl-section gl-filosofia">
+<section id="filosofia" class="gl-section gl-filosofia" data-scanline>
   <p class="gl-section-label">Nuestra Filosofía</p>
-  <div class="gl-filosofia-grid">
+  <div class="gl-filosofia-grid" data-anim="up">
     <div class="gl-filosofia-left">
       <h2>Sistemas,<br>no herramientas<br><span class="gl-gradient">aisladas.</span></h2>
     </div>
@@ -489,8 +490,8 @@ html, body {
 </section>
 
 <!-- EQUIPO -->
-<section class="gl-team-section">
-  <div class="gl-team-header" data-reveal>
+<section class="gl-team-section" data-scanline>
+  <div class="gl-team-header" data-reveal data-anim="up">
     <div class="gl-team-header-left">
       <h2>Nuestro Equipo</h2>
       <p>Detrás de cada proyecto hay un equipo multidisciplinario especializado en estrategia, inteligencia artificial, experiencia digital y crecimiento empresarial.</p>
@@ -574,7 +575,7 @@ html, body {
 </section>
 
 <!-- MISIÓN + VISIÓN -->
-<div class="gl-section gl-mv-grid">
+<div class="gl-section gl-mv-grid" data-scanline data-stagger>
   <div class="gl-mv-block">
     <p class="gl-section-label">Nuestra Misión</p>
     <h3>Sistemas inteligentes para<br><span class="gl-gradient">resultados sostenibles.</span></h3>
@@ -589,7 +590,7 @@ html, body {
 </div>
 
 <!-- FOOTER CTA -->
-<footer class="gl-footer-cta">
+<footer class="gl-footer-cta" data-anim="up">
   <h2>¿Listo para descubrir qué está <span class="gl-gradient">frenando el crecimiento</span> de tu negocio?</h2>
   <p>Solicita un diagnóstico estratégico y descubre cómo podemos ayudarte a implementar sistemas de inteligencia artificial que impulsen el crecimiento de tu empresa.</p>
   <a href="https://calendly.com/mariamontillamuelle/30min" class="gl-btn" target="_blank">
@@ -631,6 +632,7 @@ document.getElementById('next-btn').addEventListener('click', () => slideTo(curr
 document.getElementById('prev-btn').addEventListener('click', () => slideTo(current - 1));
 window.addEventListener('resize', () => slideTo(current));
 </script>
+<script src="/js/animations.js"></script>
 
 </body>
 </html>

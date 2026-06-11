@@ -424,6 +424,7 @@ html, body {
   }
 }
 </style>
+<link rel="stylesheet" href="/css/animations.css"/>
 </head>
 <body>
 
@@ -442,7 +443,7 @@ html, body {
 
 <!-- HERO -->
 <section class="gl-hero">
-  <div class="gl-hero-content">
+  <div class="gl-hero-content" data-anim="blur">
     <p class="gl-eyebrow">Casos de Éxito</p>
     <h1>Resultados reales.<br><span class="gl-gradient">Sistemas reales.</span></h1>
     <p class="gl-hero-sub">Cada negocio tiene un cuello de botella diferente. Por eso diseñamos soluciones a medida utilizando estrategia, automatización e inteligencia artificial.</p>
@@ -470,7 +471,7 @@ html, body {
 <div id="casos" class="gl-timeline-section">
 
   <!-- CASO 1: VAMOS PA DUBÁI -->
-  <div class="gl-case" data-case>
+  <div class="gl-case" data-case data-anim="up">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #1</p>
       <h2 class="gl-case-client purple">Vamos Pa<br>Dubái</h2>
@@ -516,7 +517,7 @@ html, body {
   <div class="gl-separator"></div>
 
   <!-- CASO 2: KARKAREN -->
-  <div class="gl-case" data-case>
+  <div class="gl-case" data-case data-anim="up">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #2</p>
       <h2 class="gl-case-client blue">Beauty Salon<br>Karkaren</h2>
@@ -558,7 +559,7 @@ html, body {
   <div class="gl-separator"></div>
 
   <!-- CASO 3: URBAN COFFEE -->
-  <div class="gl-case" data-case>
+  <div class="gl-case" data-case data-anim="up">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #3</p>
       <h2 class="gl-case-client green">Cafetería<br>Urban Coffee</h2>
@@ -592,12 +593,12 @@ html, body {
 </div>
 
 <!-- CIERRE -->
-<div class="gl-cierre">
+<div class="gl-cierre" data-anim="up">
   <p>La tecnología por sí sola no genera resultados.<br>Los resultados aparecen cuando existe una estrategia clara y sistemas diseñados para resolver los problemas específicos de cada negocio.</p>
 </div>
 
 <!-- FOOTER CTA -->
-<footer class="gl-footer-cta">
+<footer class="gl-footer-cta" data-anim="up">
   <h2>¿Listo para ser el<br>próximo caso de éxito?</h2>
   <p>Solicita un diagnóstico estratégico y descubre cómo podemos aplicar estas soluciones a tu empresa.</p>
   <a href="https://calendly.com/mariamontillamuelle/30min" class="gl-btn" target="_blank">
@@ -622,6 +623,7 @@ const observer = new IntersectionObserver((entries) => {
 
 cases.forEach(c => observer.observe(c));
 </script>
+<script src="/js/animations.js"></script>
 
 </body>
 </html>
