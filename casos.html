@@ -349,12 +349,136 @@ html, body {
 .gl-results.blue   li::before { content: '↗'; color: #60a5fa; opacity: 1; }
 .gl-results.green  li::before { content: '↗'; color: #34d399; opacity: 1; }
 
+/* ===== TIMELINE PROGRESS LINE ===== */
+.gl-timeline-progress {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #7c3aed, #1a56db, #059669);
+  transition: height 0.1s linear;
+  box-shadow: 0 0 12px rgba(124,58,237,0.5);
+  z-index: 2;
+}
+
+/* ===== HERO STAT CHIPS ===== */
+.gl-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+}
+.gl-stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 12px;
+  background: var(--chip-bg, rgba(255,255,255,0.04));
+  border: 1px solid var(--chip-border, rgba(255,255,255,0.1));
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(20px) scale(0.93);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.3s ease;
+}
+.gl-stat-chip.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.gl-stat-chip:hover {
+  box-shadow: 0 0 30px var(--chip-glow, rgba(255,255,255,0.1));
+  transform: translateY(-3px) scale(1.04) !important;
+}
+.gl-stat-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.gl-stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ===== CASE SPLIT ANIMATIONS ===== */
+.gl-case-left  { transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); opacity: 0; transform: translateX(-50px); }
+.gl-case-right { transition: opacity 0.8s ease 0.15s, transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.15s; opacity: 0; transform: translateX(50px); }
+.gl-case.in .gl-case-left  { opacity: 1; transform: translateX(0); }
+.gl-case.in .gl-case-right { opacity: 1; transform: translateX(0); }
+
+/* ===== CASE BLOCK STAGGER ===== */
+.gl-case-block {
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.gl-case.in .gl-case-block:nth-child(1) { opacity:1; transform:none; transition-delay: 0.2s; }
+.gl-case.in .gl-case-block:nth-child(2) { opacity:1; transform:none; transition-delay: 0.35s; }
+.gl-case.in .gl-case-block:nth-child(3) { opacity:1; transform:none; transition-delay: 0.5s; }
+
+/* ===== RESULT LIST ITEM STAGGER ===== */
+.gl-results li {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.gl-case.in .gl-results li:nth-child(1) { opacity:1; transform:none; transition-delay: 0.6s; }
+.gl-case.in .gl-results li:nth-child(2) { opacity:1; transform:none; transition-delay: 0.7s; }
+.gl-case.in .gl-results li:nth-child(3) { opacity:1; transform:none; transition-delay: 0.8s; }
+.gl-case.in .gl-results li:nth-child(4) { opacity:1; transform:none; transition-delay: 0.9s; }
+.gl-case.in .gl-results li:nth-child(5) { opacity:1; transform:none; transition-delay: 1.0s; }
+
+/* ===== CASE AMBIENT GLOW ===== */
+.gl-case { position: relative; }
+.gl-case::before {
+  content: '';
+  position: absolute;
+  inset: -4rem -6rem;
+  border-radius: 40px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.gl-case[data-color="purple"]::before { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(124,58,237,0.07), transparent 70%); }
+.gl-case[data-color="blue"]::before   { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(26,86,219,0.07), transparent 70%); }
+.gl-case[data-color="green"]::before  { background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(5,150,105,0.07), transparent 70%); }
+.gl-case.in::before { opacity: 1; }
+
+/* ===== TIMELINE DOT ACTIVE ===== */
+.gl-timeline-dot {
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+.gl-case[data-color="purple"].in .gl-timeline-dot { box-shadow: 0 0 0 6px rgba(192,132,252,0.15), 0 0 20px rgba(192,132,252,0.4); transform: scale(1.3); }
+.gl-case[data-color="blue"].in   .gl-timeline-dot { box-shadow: 0 0 0 6px rgba(96,165,250,0.15),  0 0 20px rgba(96,165,250,0.4);  transform: scale(1.3); }
+.gl-case[data-color="green"].in  .gl-timeline-dot { box-shadow: 0 0 0 6px rgba(52,211,153,0.15),  0 0 20px rgba(52,211,153,0.4);  transform: scale(1.3); }
+
 /* ===== SEPARATOR ===== */
 .gl-separator {
   max-width: 1100px;
   margin: 0 auto 8rem;
   height: 1px;
-  background: rgba(255,255,255,0.07);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.gl-separator::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.6), rgba(26,86,219,0.6), transparent);
+  background-size: 200% 100%;
+  animation: glScan 4s linear infinite;
 }
 
 /* ===== CIERRE ===== */
@@ -364,7 +488,6 @@ html, body {
   text-align: center;
   padding: 0 2.5rem 8rem;
 }
-
 .gl-cierre p {
   font-size: 1.3rem;
   color: var(--text-muted);
@@ -448,6 +571,25 @@ html, body {
     <h1>Resultados reales.<br><span class="gl-gradient">Sistemas reales.</span></h1>
     <p class="gl-hero-sub">Cada negocio tiene un cuello de botella diferente. Por eso diseñamos soluciones a medida utilizando estrategia, automatización e inteligencia artificial.</p>
     <a href="#casos" class="gl-btn">VER CASOS <span class="dot"></span></a>
+
+    <div class="gl-hero-stats">
+      <div class="gl-stat-chip" style="--chip-bg:rgba(192,132,252,0.08);--chip-border:rgba(192,132,252,0.25);--chip-glow:rgba(192,132,252,0.2);transition-delay:0.5s">
+        <span class="gl-stat-num" style="background:linear-gradient(135deg,#e879f9,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">60K+</span>
+        <span class="gl-stat-label">Seguidores</span>
+      </div>
+      <div class="gl-stat-chip" style="--chip-bg:rgba(192,132,252,0.08);--chip-border:rgba(192,132,252,0.25);--chip-glow:rgba(192,132,252,0.2);transition-delay:0.65s">
+        <span class="gl-stat-num" style="background:linear-gradient(135deg,#e879f9,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">300K€</span>
+        <span class="gl-stat-label">Facturación año 1</span>
+      </div>
+      <div class="gl-stat-chip" style="--chip-bg:rgba(96,165,250,0.08);--chip-border:rgba(96,165,250,0.25);--chip-glow:rgba(96,165,250,0.2);transition-delay:0.8s">
+        <span class="gl-stat-num" style="background:linear-gradient(135deg,#60a5fa,#1d4ed8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+40%</span>
+        <span class="gl-stat-label">Reservas</span>
+      </div>
+      <div class="gl-stat-chip" style="--chip-bg:rgba(52,211,153,0.08);--chip-border:rgba(52,211,153,0.25);--chip-glow:rgba(52,211,153,0.2);transition-delay:0.95s">
+        <span class="gl-stat-num" style="background:linear-gradient(135deg,#34d399,#047857);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+70%</span>
+        <span class="gl-stat-label">Recompra</span>
+      </div>
+    </div>
   </div>
 
   <!-- Lottie dots -->
@@ -472,9 +614,10 @@ html, body {
 
 <!-- TIMELINE -->
 <div id="casos" class="gl-timeline-section">
+  <div class="gl-timeline-progress" id="timelineProgress"></div>
 
   <!-- CASO 1: VAMOS PA DUBÁI -->
-  <div class="gl-case" data-case data-anim="up">
+  <div class="gl-case" data-case data-color="purple">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #1</p>
       <h2 class="gl-case-client purple">Vamos Pa<br>Dubái</h2>
@@ -507,10 +650,10 @@ html, body {
       <div class="gl-case-block">
         <p class="gl-block-label purple">Resultados</p>
         <ul class="gl-results purple">
-          <li>Más de 60.000 seguidores en Instagram.</li>
-          <li>Más de 8 millones de visualizaciones mensuales.</li>
-          <li>Tasa de conversión superior al 30%.</li>
-          <li>Más de 300.000€ facturados en el primer año.</li>
+          <li>Más de <strong><span data-count="60000">60.000</span> seguidores</strong> en Instagram.</li>
+          <li>Más de <strong><span data-count="8">8</span> millones</strong> de visualizaciones mensuales.</li>
+          <li>Tasa de conversión superior al <strong><span data-count="30" data-suffix="%">30%</span></strong>.</li>
+          <li>Más de <strong><span data-count="300000" data-suffix="€">300.000€</span></strong> facturados en el primer año.</li>
           <li>Crecimiento conseguido sin inversión en publicidad.</li>
         </ul>
       </div>
@@ -520,7 +663,7 @@ html, body {
   <div class="gl-separator"></div>
 
   <!-- CASO 2: KARKAREN -->
-  <div class="gl-case" data-case data-anim="up">
+  <div class="gl-case" data-case data-color="blue">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #2</p>
       <h2 class="gl-case-client blue">Beauty Salon<br>Karkaren</h2>
@@ -549,7 +692,7 @@ html, body {
       <div class="gl-case-block">
         <p class="gl-block-label blue">Resultados</p>
         <ul class="gl-results blue">
-          <li>Incremento del 40% en reservas.</li>
+          <li>Incremento del <strong><span data-count="40" data-suffix="%">40%</span></strong> en reservas.</li>
           <li>Reducción significativa del tiempo dedicado a atención al cliente.</li>
           <li>Menos oportunidades perdidas por falta de respuesta.</li>
           <li>Mayor ocupación de agenda.</li>
@@ -562,7 +705,7 @@ html, body {
   <div class="gl-separator"></div>
 
   <!-- CASO 3: URBAN COFFEE -->
-  <div class="gl-case" data-case data-anim="up">
+  <div class="gl-case" data-case data-color="green">
     <div class="gl-case-left">
       <p class="gl-case-number">Caso de Éxito #3</p>
       <h2 class="gl-case-client green">Cafetería<br>Urban Coffee</h2>
@@ -583,7 +726,7 @@ html, body {
       <div class="gl-case-block">
         <p class="gl-block-label green">Resultados</p>
         <ul class="gl-results green">
-          <li>Incremento del 70% en la recompra de clientes.</li>
+          <li>Incremento del <strong><span data-count="70" data-suffix="%">70%</span></strong> en la recompra de clientes.</li>
           <li>Mayor frecuencia de visita.</li>
           <li>Base de clientes fidelizados en crecimiento constante.</li>
           <li>Reducción de la dependencia de promociones tradicionales.</li>
@@ -616,18 +759,39 @@ html, body {
 <script src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/js/adsorb.27415dc4b.js" defer></script>
 
 <script>
-// Scroll reveal for cases
-const cases = document.querySelectorAll('[data-case]');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 100);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
+(function() {
+  /* ── Stat chips entrance ── */
+  function revealChips() {
+    document.querySelectorAll('.gl-stat-chip').forEach(c => {
+      setTimeout(() => c.classList.add('in'), parseFloat(c.style.transitionDelay || 0) * 1000);
+    });
+  }
+  window.addEventListener('load', revealChips);
 
-cases.forEach(c => observer.observe(c));
+  /* ── Cases IntersectionObserver ── */
+  const caseObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in', 'visible');
+        caseObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-case]').forEach(c => caseObs.observe(c));
+
+  /* ── Timeline progress line ── */
+  const section  = document.getElementById('casos');
+  const progLine = document.getElementById('timelineProgress');
+  if (section && progLine) {
+    window.addEventListener('scroll', () => {
+      const rect  = section.getBoundingClientRect();
+      const total = section.offsetHeight;
+      const done  = Math.max(0, -rect.top);
+      const pct   = Math.min(100, (done / total) * 100 + 5);
+      progLine.style.height = pct + '%';
+    }, { passive: true });
+  }
+})();
 </script>
 <script src="/js/animations.js"></script>
 
