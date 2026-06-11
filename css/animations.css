@@ -1,5 +1,5 @@
 /* =====================================================
-   GLOWLABS — SCROLL & TECH ANIMATIONS
+   GLOWLABS — WOW ANIMATIONS v2
    ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -7,33 +7,81 @@
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+  .gl-cursor, .gl-cursor-glow { display: none !important; }
 }
 
-/* ── Gradient text shimmer ───────────────────────── */
+/* ── Custom cursor ─────────────────────────────────── */
+.gl-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 14px; height: 14px;
+  border: 1.5px solid rgba(167,139,250,0.9);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  z-index: 99999;
+  transition: width 0.25s ease, height 0.25s ease,
+              border-color 0.25s ease, background 0.25s ease;
+  will-change: transform;
+}
+.gl-cursor.hovering {
+  width: 40px; height: 40px;
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.7);
+}
+.gl-cursor.clicking {
+  transform: translate(-50%,-50%) scale(0.7);
+}
+.gl-cursor-trail {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  z-index: 99998;
+  will-change: transform;
+  transition: width 0.4s, height 0.4s, opacity 0.4s;
+}
+
+/* ── Scroll progress bar ───────────────────────────── */
+.gl-progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #7c3aed, #a78bfa, #f43f5e);
+  z-index: 9999;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 12px rgba(124,58,237,0.6);
+}
+
+/* ── Dot grid on heroes ────────────────────────────── */
+.gl-hero {
+  background-image: radial-gradient(rgba(255,255,255,0.028) 1px, transparent 1px);
+  background-size: 36px 36px;
+  overflow: hidden;
+}
+
+/* ── Gradient text shimmer ─────────────────────────── */
 .gl-gradient,
 .gl-gradient-purple,
 .gl-gradient-blue,
 .gl-gradient-green {
-  background-size: 200% auto !important;
-  animation: glShimmer 5s linear infinite;
+  background-size: 250% auto !important;
+  animation: glShimmer 6s linear infinite;
 }
 @keyframes glShimmer {
   0%   { background-position: 0% center; }
-  100% { background-position: -200% center; }
+  100% { background-position: -250% center; }
 }
 
-/* ── Dot grid on heroes ──────────────────────────── */
-.gl-hero {
-  background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 36px 36px;
-}
-
-/* ── Eyebrow blinking cursor ─────────────────────── */
+/* ── Eyebrow blinking cursor ───────────────────────── */
 .gl-eyebrow::after,
 .gl-section-label::after {
   content: '_';
   margin-left: 2px;
-  font-weight: 400;
   animation: glBlink 1.1s step-end infinite;
   color: inherit;
   opacity: 0.6;
@@ -43,33 +91,55 @@
   50%       { opacity: 0; }
 }
 
-/* ── Scroll reveal base states ───────────────────── */
+/* ── Word split reveal ─────────────────────────────── */
+.gl-word-outer {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+}
+.gl-word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gl-word-inner.revealed {
+  transform: translateY(0);
+}
+
+/* ── Scroll reveal base states ─────────────────────── */
 [data-anim] {
   opacity: 0;
   transition:
-    opacity  0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    filter   0.75s ease;
+    opacity  0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter   0.8s ease;
   transition-delay: var(--anim-d, 0s);
 }
-[data-anim="up"]    { transform: translateY(38px); }
-[data-anim="left"]  { transform: translateX(-38px); }
-[data-anim="right"] { transform: translateX(38px); }
-[data-anim="scale"] { transform: scale(0.93); }
-[data-anim="blur"]  { filter: blur(8px); transform: translateY(10px); }
-[data-anim].in {
+[data-anim="up"]    { transform: translateY(44px); }
+[data-anim="left"]  { transform: translateX(-44px); }
+[data-anim="right"] { transform: translateX(44px); }
+[data-anim="scale"] { transform: scale(0.9); }
+[data-anim="blur"]  { filter: blur(10px) saturate(0); transform: translateY(12px); }
+[data-anim="clip"] {
+  clip-path: inset(0 0 100% 0);
+  opacity: 1 !important;
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-anim].in, [data-anim="clip"].in {
   opacity: 1;
   transform: none;
   filter: none;
+  clip-path: inset(0 0 0% 0);
 }
 
-/* ── Stagger groups ──────────────────────────────── */
+/* ── Stagger groups ────────────────────────────────── */
 [data-stagger] > * {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(32px);
   transition:
-    opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity  0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--anim-d, 0s);
 }
 [data-stagger].in > * {
@@ -77,24 +147,18 @@
   transform: none;
 }
 
-/* ── Number counters ─────────────────────────────── */
-[data-count] {
-  display: inline-block;
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── Animated scan divider ───────────────────────── */
+/* ── Animated scan divider ─────────────────────────── */
 .gl-scan-line {
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(99,102,241,0.6) 30%,
-    rgba(244,63,94,0.6) 70%,
+    rgba(99,102,241,0.5) 30%,
+    rgba(244,63,94,0.5) 70%,
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: glScan 4s linear infinite;
+  animation: glScan 5s linear infinite;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -103,61 +167,142 @@
   100% { background-position:  200% 0; }
 }
 
-/* ── Case number glitch ──────────────────────────── */
-.gl-case-number {
-  position: relative;
+/* ── 3D card tilt ──────────────────────────────────── */
+.gl-tilt {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
 }
-[data-anim="left"].in .gl-case-number,
-[data-anim="glitch"].in {
-  animation: glGlitch 0.5s ease forwards;
-}
-@keyframes glGlitch {
-  0%  { opacity:0; transform: translateX(-4px) skew(-2deg); }
-  30% { opacity:1; transform: translateX(3px) skew(1deg); color: #a78bfa; }
-  60% { transform: translateX(-2px); }
-  80% { transform: translateX(1px); }
-  100%{ transform: none; color: inherit; }
+.gl-tilt:hover {
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 30px rgba(99,102,241,0.15);
 }
 
-/* ── Feature items hover glow ────────────────────── */
+/* ── Magnetic button ───────────────────────────────── */
+.gl-btn {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    box-shadow 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+/* Ripple */
+.gl-btn .gl-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transform: scale(0);
+  animation: glRipple 0.6s linear forwards;
+  pointer-events: none;
+}
+@keyframes glRipple {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── Feature items hover ───────────────────────────── */
 .gl-feature-item {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
 }
 .gl-feature-item:hover {
   opacity: 1 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 .gl-feature-item:hover .gl-feature-title {
   color: #fff;
 }
 
-/* ── Team card hover ─────────────────────────────── */
+/* ── Team card hover glow ──────────────────────────── */
+.gl-team-card {
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
 .gl-team-card-photo {
   transition: box-shadow 0.4s ease;
 }
 .gl-team-card:hover .gl-team-card-photo {
-  box-shadow: 0 0 40px rgba(99,102,241,0.3);
+  box-shadow: 0 0 50px rgba(99,102,241,0.3);
 }
 
-/* ── Result bullet highlight ─────────────────────── */
-.gl-results li {
-  position: relative;
-  padding-left: 0;
-  transition: transform 0.2s ease;
+/* ── Case block hover ──────────────────────────────── */
+.gl-case-block {
+  transition: transform 0.3s ease, border-color 0.3s ease !important;
 }
-.gl-results li:hover {
+.gl-case-block:hover {
   transform: translateX(4px);
 }
 
-/* ── About filosofia border pulse ────────────────── */
+/* ── Result bullets ────────────────────────────────── */
+.gl-results li {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.gl-results li:hover {
+  transform: translateX(6px);
+}
+
+/* ── About filosofia border pulse ──────────────────── */
 .gl-filosofia-highlight {
-  position: relative;
   animation: borderPulse 3s ease-in-out infinite;
 }
 @keyframes borderPulse {
-  0%, 100% { border-color: rgba(169,85,247,0.5); }
-  50%       { border-color: rgba(249,115,22,0.8); }
+  0%, 100% { border-left-color: rgba(169,85,247,0.5); }
+  50%       { border-left-color: rgba(249,115,22,0.9); }
 }
 
-/* ── Hero content z-index fix ────────────────────── */
+/* ── Service visual glow on scroll ─────────────────── */
+.gl-service-visual {
+  transition: box-shadow 0.5s ease;
+}
+.gl-service-section.in .gl-service-visual {
+  box-shadow: 0 0 80px rgba(99,102,241,0.12);
+}
+
+/* ── Ambient section glow ──────────────────────────── */
+.gl-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 0%, var(--ambient, rgba(99,102,241,0.04)) 0%, transparent 70%);
+  transition: --ambient 1s ease;
+}
+
+/* ── Number counter ────────────────────────────────── */
+[data-count] {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Hero content z-index ──────────────────────────── */
 .gl-hero-content { position: relative; z-index: 3; }
 .gl-hero-dots    { z-index: 2; }
+.gl-hero-bg-glow { z-index: 0; }
+
+/* ── Glow dot on timeline ──────────────────────────── */
+.gl-timeline-dot {
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+  50%       { box-shadow: 0 0 0 10px rgba(124,58,237,0); }
+}
+.gl-case.in .gl-timeline-dot {
+  animation: dotPulseActive 2.5s ease-in-out infinite;
+}
+@keyframes dotPulseActive {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(124,58,237,0); }
+}
+
+/* ── Number glitch on case reveal ──────────────────── */
+.gl-case.in .gl-case-number {
+  animation: glGlitch 0.6s 0.1s ease both;
+}
+@keyframes glGlitch {
+  0%  { opacity:0; transform: translateX(-6px) skew(-3deg); color: #a78bfa; }
+  30% { opacity:1; transform: translateX(4px) skew(1deg); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(1px); }
+  100%{ transform: none; color: inherit; }
+}
