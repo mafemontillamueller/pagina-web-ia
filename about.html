@@ -434,6 +434,15 @@ html, body {
   .gl-team-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
   .gl-team-card { width: 80vw; }
 }
+@media (max-width: 600px) {
+  .gl-nav-links a:not(.gl-btn) { display: none; }
+  .gl-nav { padding: 1rem 1.2rem; }
+  .gl-hero { padding: 7rem 1.2rem 3rem; }
+  .gl-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+  .gl-section { padding: 4rem 1.2rem; }
+  .gl-filosofia-left h2 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+  .gl-footer-cta { padding: 4rem 1.5rem; }
+}
 </style>
 <link rel="stylesheet" href="/css/animations.css"/>
 </head>

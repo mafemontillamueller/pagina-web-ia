@@ -57,6 +57,9 @@
   box-shadow: 0 0 12px rgba(124,58,237,0.6);
 }
 
+/* ── Prevent translateX overflow on all pages ─────── */
+body { overflow-x: hidden; }
+
 /* ── Homepage hero canvas support ─────────────────── */
 .hero-section {
   position: relative !important;
