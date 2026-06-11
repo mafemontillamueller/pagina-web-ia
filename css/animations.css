@@ -57,6 +57,12 @@
   box-shadow: 0 0 12px rgba(124,58,237,0.6);
 }
 
+/* ── Homepage hero canvas support ─────────────────── */
+.hero-section {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
 /* ── Dot grid on heroes ────────────────────────────── */
 .gl-hero {
   background-image: radial-gradient(rgba(255,255,255,0.028) 1px, transparent 1px);

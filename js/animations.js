@@ -60,7 +60,7 @@
      3. NEURAL-NET CANVAS on .gl-hero
   ═══════════════════════════════════════════════ */
   function initNeuralNet() {
-    document.querySelectorAll('.gl-hero').forEach(hero => {
+    document.querySelectorAll('.gl-hero, .hero-section').forEach(hero => {
       const canvas = document.createElement('canvas');
       canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;';
       hero.insertBefore(canvas, hero.firstChild);
@@ -112,8 +112,8 @@
   ═══════════════════════════════════════════════ */
   function initHeroParallax() {
     if (isReduced) return;
-    document.querySelectorAll('.gl-hero').forEach(hero => {
-      const content = hero.querySelector('.gl-hero-content');
+    document.querySelectorAll('.gl-hero, .hero-section').forEach(hero => {
+      const content = hero.querySelector('.gl-hero-content, .hero_content');
       const shapes  = hero.querySelectorAll('.gl-shape-wrap');
       if (!content) return;
       window.addEventListener('scroll', () => {
