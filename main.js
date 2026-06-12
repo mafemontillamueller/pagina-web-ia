@@ -317,4 +317,26 @@ document.addEventListener('DOMContentLoaded', function () {
       if (heroElement) heroElement.style.display = 'none';
     }
   } catch (e) { }
+
+  // En móvil, forzar Lottie del splash a reproducirse como loop independiente
+  // (en desktop es scroll-driven por IX2; en móvil no hay suficiente scroll)
+  try {
+    if (window.innerWidth <= 767) {
+      var wfLottie = window.Webflow && window.Webflow.require && window.Webflow.require('lottie');
+      if (wfLottie && wfLottie.lottie) {
+        var splashEl = document.querySelector('.splash_lottie-1');
+        if (splashEl) {
+          splashEl.innerHTML = '';
+          wfLottie.lottie.loadAnimation({
+            container: splashEl,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64f885c762524263f8706468_adsorb_graphic_element_safari.json'
+          });
+        }
+      }
+    }
+  } catch (e) {}
+
 });
