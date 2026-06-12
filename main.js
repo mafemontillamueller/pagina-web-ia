@@ -1,8 +1,8 @@
 // Consolidated inline scripts from index.html
 // Order assumes external libraries (jQuery, Lenis, GSAP, ScrollTrigger, SplitType, PureCounter) are loaded before this file.
 
-// Lenis smooth scroll init
-if (typeof Lenis !== 'undefined') {
+// Lenis smooth scroll init — desktop only (mobile uses native touch scroll)
+if (typeof Lenis !== 'undefined' && !/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
   const lenis = new Lenis();
   lenis.on('scroll', (e) => {
     // console.log(e)
