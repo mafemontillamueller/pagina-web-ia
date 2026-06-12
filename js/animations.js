@@ -111,7 +111,7 @@
      4. HERO SCROLL PARALLAX (content drifts up)
   ═══════════════════════════════════════════════ */
   function initHeroParallax() {
-    if (isReduced || isMobile) return; /* no parallax on mobile — causes overlap */
+    if (isReduced) return;
     document.querySelectorAll('.gl-hero, .hero-section').forEach(hero => {
       const content = hero.querySelector('.gl-hero-content, .hero_content');
       const shapes  = hero.querySelectorAll('.gl-shape-wrap');

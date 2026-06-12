@@ -16,25 +16,6 @@
   .main-wrapper, .page-wrapper { overflow-x: hidden; }
 }
 
-/* ── MOBILE HERO: reduce font + padding ──────────── */
-@media (max-width: 767px) {
-  /* Smaller hero h1 on phones */
-  .hero-section h1,
-  .hero_content h1 {
-    font-size: clamp(1.7rem, 8vw, 2.8rem) !important;
-    line-height: 1.18 !important;
-  }
-  /* Less vertical padding so hero fits in one screen */
-  .padding-section-large.is-home-hero {
-    padding-top: 5vh !important;
-    padding-bottom: 4vh !important;
-  }
-  /* Hero description text smaller */
-  .hero_content p {
-    font-size: 0.95rem !important;
-    margin-top: 0.8rem !important;
-  }
-}
 /* ────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
