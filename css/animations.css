@@ -2,23 +2,37 @@
    GLOWLABS — WOW ANIMATIONS v2
    ===================================================== */
 
-/* ── MOBILE NAV: hide desktop menu + fix scroll ───── */
+/* ── MOBILE NAV + HERO + SCROLL FIXES ────────────── */
 @media (max-width: 991px) {
-  /* Hide desktop nav (links + CTA button) — hamburger handles mobile nav */
+  /* Hide desktop nav — hamburger handles mobile */
   .nav_container .nav_menu { display: none !important; }
   .nav_burger {
     display: flex !important;
     z-index: 9999 !important;
     position: relative !important;
   }
-  /* Fix scroll being blocked on mobile (Finsweet or Lenis side effects) */
-  html, body {
-    overflow-x: hidden !important;
-    touch-action: pan-y !important;
+  /* Prevent horizontal overflow only (don't restrict vertical/touch) */
+  body { overflow-x: hidden; }
+  .main-wrapper, .page-wrapper { overflow-x: hidden; }
+}
+
+/* ── MOBILE HERO: reduce font + padding ──────────── */
+@media (max-width: 767px) {
+  /* Smaller hero h1 on phones */
+  .hero-section h1,
+  .hero_content h1 {
+    font-size: clamp(1.7rem, 8vw, 2.8rem) !important;
+    line-height: 1.18 !important;
   }
-  /* Make sure main content is scrollable */
-  .main-wrapper, .page-wrapper {
-    overflow-x: hidden;
+  /* Less vertical padding so hero fits in one screen */
+  .padding-section-large.is-home-hero {
+    padding-top: 5vh !important;
+    padding-bottom: 4vh !important;
+  }
+  /* Hero description text smaller */
+  .hero_content p {
+    font-size: 0.95rem !important;
+    margin-top: 0.8rem !important;
   }
 }
 /* ────────────────────────────────────────────────── */
