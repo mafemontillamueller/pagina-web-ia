@@ -5,6 +5,10 @@
 <style>
 /* Ocultar animaciones duplicadas del Webflow original */
 #splash, .splash-section { display:block !important; opacity:1 !important; visibility:visible !important; }
+@media (max-width: 767px) {
+  #splash, .splash-section { height: 100vh !important; margin-bottom: 0 !important; }
+  .splash_item { position: relative !important; }
+}
 #shader-background { display:none !important; }
 /* Hacer texto del hero visible encima de la animación */
 [data-w-id="defa40de-86da-ae8d-c445-1abbb969543a"],
