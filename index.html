@@ -262,7 +262,7 @@ html.lenis {
 <rect width="14" height="14" fill="white" transform="translate(5 19) rotate(-90)"/>
 </clipPath>
 </defs>
-</svg></div></div></a></div><div data-w-id="ef17cb56-1d5f-2824-ec19-90cbd2b4534d" class="nav_burger"><div class="nav_burger-frame"><div class="nav_burger-line is-1"></div><div class="nav_burger-line is-2"></div><div class="nav_burger-line is-3"></div></div></div></div></div><div fs-scrolldisable-element="when-visible" class="open-menu"><div class="nav_menu is-tablet"><div class="nav_list"><a href="/services" class="nav_link heading-style-h3">Services</a><a href="/about" class="nav_link heading-style-h3">About</a><a href="/casos" class="nav_link heading-style-h3">Casos de Éxito</a></div><a fs-mirrorclick-element="" data-w-id="0553af30-30d5-f0a2-bcf1-18069f7d5f43" href="https://calendly.com/mariamontillamuelle/30min" target="_blank" rel="noopener" class="button w-inline-block"><div class="text-size-regular text-style-allcaps">Solicitar Diagnóstico</div><div class="button_ic is-default"><div class="ic ic-size-medium w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+</svg></div></div></a></div><div data-w-id="ef17cb56-1d5f-2824-ec19-90cbd2b4534d" class="nav_burger"><div class="nav_burger-frame"><div class="nav_burger-line is-1"></div><div class="nav_burger-line is-2"></div><div class="nav_burger-line is-3"></div></div></div></div></div><div class="open-menu"><div class="nav_menu is-tablet"><div class="nav_list"><a href="/services" class="nav_link heading-style-h3">Services</a><a href="/about" class="nav_link heading-style-h3">About</a><a href="/casos" class="nav_link heading-style-h3">Casos de Éxito</a></div><a fs-mirrorclick-element="" data-w-id="0553af30-30d5-f0a2-bcf1-18069f7d5f43" href="https://calendly.com/mariamontillamuelle/30min" target="_blank" rel="noopener" class="button w-inline-block"><div class="text-size-regular text-style-allcaps">Solicitar Diagnóstico</div><div class="button_ic is-default"><div class="ic ic-size-medium w-embed"><svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="8" y="8" width="8" height="8" rx="4" fill="currentcolor"/>
 </svg></div></div><div class="button_ic is-hover"><div class="ic ic-size-medium w-embed"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="1" y="1" width="22" height="22" rx="11" fill="white"/>
@@ -546,18 +546,12 @@ html.lenis {
 
 <script>
 
-  	const lenis = new Lenis()
-
-lenis.on('scroll', (e) => {
-  console.log(e)
-})
-
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
+  // Lenis smooth scroll — disable on mobile to preserve native touch scroll
+  if (!/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    const lenis = new Lenis();
+    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+  }
  	
 </script><script>
 	// cookie script
