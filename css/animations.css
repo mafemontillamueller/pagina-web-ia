@@ -79,7 +79,6 @@ body { overflow-x: hidden; }
 /* ── Homepage hero canvas support ─────────────────── */
 .hero-section {
   position: relative !important;
-  overflow: hidden !important;
 }
 
 /* ── Dot grid on heroes ────────────────────────────── */
