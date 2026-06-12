@@ -772,23 +772,30 @@ if (screenHeight < 835) {
 <style>
 /* ── Mobile nav fixes ─────────────────────────────── */
 @media(max-width:991px){
+  /* Hide the entire desktop nav menu (links + CTA button) on mobile.
+     The .open-menu hamburger panel handles mobile navigation. */
+  .nav_container .nav_menu { display:none !important; }
+  /* Make sure hamburger is visible and above everything */
+  .nav_burger { display:flex !important; z-index:9999; position:relative; }
+  /* Style the open/expanded mobile menu */
   .open-menu { z-index:9998; }
   .open-menu .nav_menu.is-tablet {
-    display:flex;flex-direction:column;gap:0.5rem;padding:1.5rem;
+    display:flex !important;
+    flex-direction:column;
+    gap:0.5rem;
+    padding:1.5rem;
   }
-  .open-menu .nav_list { display:flex;flex-direction:column;gap:0.3rem; }
-  .open-menu .nav_link { font-size:1.4rem; }
-  /* Ensure button in mobile menu doesn't overlap */
-  .open-menu .button {
+  .open-menu .nav_list { display:flex; flex-direction:column; gap:0.4rem; }
+  .open-menu .nav_link.heading-style-h3 { font-size:1.5rem; }
+  /* Button inside mobile menu */
+  .open-menu .nav_menu.is-tablet > a.button {
+    display:flex !important;
     position:static !important;
     width:100%;
-    margin-top:1.2rem;
+    margin-top:1rem;
     box-sizing:border-box;
-    display:flex !important;
+    justify-content:space-between;
   }
-  /* Hide desktop CTA button on mobile so it doesn't overlap burger */
-  .nav_container > .nav_menu > a.button { display:none !important; }
-  .nav_burger { z-index:9999; position:relative; }
 }
 
 /* ── Hero floating stat chips ────────────────────── */
