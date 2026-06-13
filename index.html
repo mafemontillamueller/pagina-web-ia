@@ -4,10 +4,11 @@
 <meta name='impact-site-verification' value='-416856628'>
 <style>
 /* Ocultar animaciones duplicadas del Webflow original */
-#splash, .splash-section { display:block !important; opacity:1 !important; visibility:visible !important; }
+#splash { display:block !important; }
 @media (max-width: 767px) {
-  #splash, .splash-section { height: 100vh !important; margin-bottom: 0 !important; }
-  .splash_item { position: relative !important; }
+  #splash { height: 100vh !important; margin-bottom: 0 !important; overflow: hidden; }
+  .splash_item { position: relative !important; height: 100vh !important; }
+  .splash_lottie-1 { width: 100vw !important; height: 100vw !important; }
 }
 #shader-background { display:none !important; }
 /* Hacer texto del hero visible encima de la animación */
