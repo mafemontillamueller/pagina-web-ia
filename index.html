@@ -6,9 +6,19 @@
 /* Ocultar animaciones duplicadas del Webflow original */
 #splash { display:block !important; }
 @media (max-width: 767px) {
-  #splash { height: 100vh !important; margin-bottom: 0 !important; overflow: hidden; }
+  /* Contener #splash en su propio stacking context para que el lottie z-index:8 quede adentro */
+  #splash {
+    height: 100vh !important;
+    margin-bottom: 0 !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+    z-index: 1 !important;
+    position: relative !important;
+  }
   .splash_item { position: relative !important; height: 100vh !important; }
   .splash_lottie-1 { width: 100vw !important; height: 100vw !important; }
+  /* Asegurar que card-section empiece después del splash, no encima */
+  .card-section { position: relative !important; z-index: 2 !important; }
 }
 #shader-background { display:none !important; }
 /* Hacer texto del hero visible encima de la animación */
