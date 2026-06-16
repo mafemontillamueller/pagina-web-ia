@@ -7,10 +7,10 @@
 #splash { display:block !important; }
 @media (max-width: 767px) {
   #splash { height: 100vh !important; margin-bottom: 0 !important; }
-  /* overflow:hidden en splash_item para cortar el lottie sin romper stacking context */
-  .splash_item { position: relative !important; height: 100vh !important; overflow: hidden !important; }
-  .splash_lottie-1 { width: 100vw !important; height: 100vw !important; }
-  .card-section { position: relative !important; }
+  .splash_item { position: relative !important; height: 100vh !important; }
+  .splash_lottie-1 { width: 100vw !important; height: 100vw !important; overflow: hidden !important; }
+  /* Bajar las cards para que no se solapen con el splash */
+  .card-section { margin-top: 4rem !important; }
 }
 #shader-background { display:none !important; }
 /* Hacer texto del hero visible encima de la animación */
