@@ -11,16 +11,9 @@
   .splash_lottie-1 { width: 100vw !important; height: 100vw !important; overflow: hidden !important; }
   /* Bajar las cards para que no se solapen con el splash */
   .card-section { margin-top: 4rem !important; }
-  /* Ocultar botón del nav principal en móvil (ya está en el menú hamburguesa) */
-  .nav_menu > .button { display: none !important; }
-  /* Botón dentro del menú abierto: compacto y estético */
-  .open-menu .button {
-    width: auto !important;
-    align-self: flex-start !important;
-    padding: 0.5rem 1.2rem !important;
-    font-size: 0.8rem !important;
-    margin-top: 1rem !important;
-  }
+  /* Quitar botón del navbar en móvil */
+  .nav_container .nav_menu .button,
+  .nav_container > .button { display: none !important; }
 }
 #shader-background { display:none !important; }
 /* Hacer texto del hero visible encima de la animación */
