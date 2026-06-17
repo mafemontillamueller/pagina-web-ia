@@ -317,5 +317,4 @@ document.addEventListener('DOMContentLoaded', function () {
       if (heroElement) heroElement.style.display = 'none';
     }
   } catch (e) { }
-
 });
