@@ -30,9 +30,39 @@ html, body {
   font-family: 'Sora', sans-serif;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 #shader-background { display: none !important; }
+
+/* ===== BACKGROUND ===== */
+.bg-glow {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-glow::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse at center, rgba(124,58,237,0.15) 0%, rgba(99,102,241,0.06) 40%, transparent 70%);
+  filter: blur(40px);
+}
+
+/* LOTTIE BG */
+.lottie-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.25;
+}
+.lottie-bg > div { width: 100%; height: 100%; }
 
 /* ===== NAV ===== */
 .gl-nav {
@@ -43,8 +73,8 @@ html, body {
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 2.5rem;
-  background: rgba(10,10,12,0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(10,10,12,0.7);
+  backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .gl-logo {
@@ -60,19 +90,19 @@ html, body {
   gap: 2rem;
 }
 .gl-nav-links a {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.7);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   transition: color 0.2s;
 }
 .gl-nav-links a:hover { color: #fff; }
-.gl-btn {
+.gl-btn-nav {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.4rem;
-  border: 1.5px solid rgba(255,255,255,0.5);
+  border: 1.5px solid rgba(255,255,255,0.4);
   border-radius: 9999px;
   color: #fff;
   font-size: 0.78rem;
@@ -80,34 +110,11 @@ html, body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s;
   white-space: nowrap;
 }
-.gl-btn:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
-.gl-btn .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
-.gl-btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 2rem;
-  background: linear-gradient(135deg, #a855f7, #6366f1);
-  border: none;
-  border-radius: 9999px;
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: opacity 0.2s, transform 0.2s;
-  cursor: pointer;
-}
-.gl-btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.gl-btn-nav:hover { background: rgba(255,255,255,0.08); }
+.gl-btn-nav .dot { width:6px;height:6px;border-radius:50%;background:currentColor; }
 
 /* ===== GRADIENT ===== */
 .gl-gradient {
@@ -117,8 +124,10 @@ html, body {
   background-clip: text;
 }
 
-/* ===== THANK YOU SECTION ===== */
+/* ===== MAIN ===== */
 .ty-page {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -127,82 +136,198 @@ html, body {
   padding: 8rem 2.5rem 6rem;
   text-align: center;
 }
-.ty-icon {
-  width: 72px;
-  height: 72px;
+
+/* Check icon */
+.ty-check {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(99,102,241,0.15));
-  border: 1.5px solid rgba(168,85,247,0.3);
+  border: 1.5px solid rgba(168,85,247,0.4);
+  background: rgba(124,58,237,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 2.5rem;
-  font-size: 2rem;
+  position: relative;
 }
-.ty-eyebrow {
-  font-size: 0.75rem;
+.ty-check::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(168,85,247,0.15);
+}
+.ty-check svg {
+  width: 34px;
+  height: 34px;
+  stroke: #a855f7;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ty-check-anim {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawCheck 0.6s ease 0.3s forwards;
+}
+@keyframes drawCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+.ty-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 9999px;
+  font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 1.2rem;
+  color: #34d399;
+  margin-bottom: 1.8rem;
 }
+.ty-badge-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px #34d399;
+}
+
 .ty-page h1 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  margin-bottom: 1.8rem;
-  max-width: 600px;
+  margin-bottom: 1.5rem;
+  max-width: 640px;
 }
 .ty-page p {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-muted);
   line-height: 1.75;
-  max-width: 560px;
-  margin: 0 auto 2.5rem;
+  max-width: 520px;
+  margin: 0 auto 3rem;
 }
-.ty-divider {
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, #f97316, #a855f7);
-  margin: 0 auto 2.5rem;
+
+/* CTA button */
+.ty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2.2rem;
+  background: linear-gradient(135deg, #7c3aed, #6366f1);
   border-radius: 9999px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 24px rgba(124,58,237,0.4);
+}
+.ty-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 32px rgba(124,58,237,0.5);
+}
+.ty-btn .dot { width:6px;height:6px;border-radius:50%;background:#fff; }
+
+/* Next steps card */
+.ty-card {
+  margin: 4rem auto 0;
+  max-width: 480px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.8rem 2rem;
+  text-align: left;
+}
+.ty-card-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ty-steps { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+.ty-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ty-step-icon {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(124,58,237,0.2);
+  border: 1px solid rgba(124,58,237,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: #a855f7;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 /* ===== FOOTER ===== */
-.gl-footer-bottom {
+.gl-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 2.5rem;
+}
+.gl-footer-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2.5rem 2.5rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
 }
 .gl-footer-logo {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: #fff;
   text-decoration: none;
   letter-spacing: -0.03em;
+  opacity: 0.6;
 }
-.gl-copyright {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
+.gl-copyright { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .gl-nav-links a:not(.gl-btn) { display: none; }
+  .gl-nav-links a:not(.gl-btn-nav) { display: none; }
   .gl-nav { padding: 1rem 1.2rem; }
   .ty-page { padding: 7rem 1.2rem 4rem; }
-  .gl-footer-bottom { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.2rem; }
+  .gl-footer { padding: 2rem 1.2rem; }
+  .gl-footer-inner { flex-direction: column; gap: 0.8rem; text-align: center; }
+  .ty-card { margin: 2.5rem auto 0; }
 }
 </style>
 <link rel="stylesheet" href="/css/animations.css"/>
 </head>
 <body>
+
+<div class="bg-glow"></div>
+
+<div class="lottie-bg">
+  <div
+    data-animation-type="lottie"
+    data-src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64f885c762524263f8706468_adsorb_graphic_element_safari.json"
+    data-loop="1" data-autoplay="1" data-renderer="svg">
+  </div>
+</div>
 
 <!-- NAV -->
 <nav class="gl-nav">
@@ -212,31 +337,58 @@ html, body {
     <a href="/about">About</a>
     <a href="/casos">Casos de Éxito</a>
   </div>
-  <a href="https://calendly.com/mariamontillamuelle/30min" class="gl-btn" target="_blank">
+  <a href="https://calendly.com/mariamontillamuelle/30min" class="gl-btn-nav" target="_blank">
     SOLICITAR DIAGNÓSTICO <span class="dot"></span>
   </a>
 </nav>
 
-<!-- CONTENIDO PRINCIPAL -->
 <main class="ty-page">
-  <div class="ty-icon">✓</div>
-  <p class="ty-eyebrow">Formulario enviado</p>
+  <div class="ty-check">
+    <svg viewBox="0 0 24 24">
+      <polyline class="ty-check-anim" points="4 12 9 17 20 7"/>
+    </svg>
+  </div>
+
+  <div class="ty-badge">
+    <span class="ty-badge-dot"></span>
+    Formulario enviado con éxito
+  </div>
+
   <h1>¡Gracias! Hemos recibido tu <span class="gl-gradient">información.</span></h1>
-  <div class="ty-divider"></div>
+
   <p>Nuestro equipo revisará tus respuestas y comenzará a preparar tu estrategia personalizada de IA. Muy pronto nos pondremos en contacto contigo para los siguientes pasos.</p>
-  <a href="/" class="gl-btn-primary">
-    Volver al inicio <span class="dot" style="background:#fff"></span>
+
+  <a href="/" class="ty-btn">
+    Volver al inicio <span class="dot"></span>
   </a>
+
+  <div class="ty-card">
+    <div class="ty-card-title">¿Qué sigue?</div>
+    <ul class="ty-steps">
+      <li>
+        <span class="ty-step-icon">1</span>
+        Revisamos tus respuestas en detalle en las próximas horas.
+      </li>
+      <li>
+        <span class="ty-step-icon">2</span>
+        Identificamos las oportunidades de automatización con IA para tu negocio.
+      </li>
+      <li>
+        <span class="ty-step-icon">3</span>
+        Te contactamos para presentarte tu estrategia personalizada.
+      </li>
+    </ul>
+  </div>
 </main>
 
-<!-- FOOTER -->
-<footer>
-  <div class="gl-footer-bottom">
+<footer class="gl-footer">
+  <div class="gl-footer-inner">
     <a href="/" class="gl-footer-logo">Glowlabs</a>
     <span class="gl-copyright">GlowLabs &copy; 2025. Todos los derechos reservados.</span>
   </div>
 </footer>
 
+<script src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/js/adsorb.27415dc4b.js" defer></script>
 <script src="/js/animations.js"></script>
 
 </body>
