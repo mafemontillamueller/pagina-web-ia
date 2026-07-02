@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<title>GlowLabs - Calculadora de ROI · ¿Cuánto pierdes sin automatización?</title>
+<meta name="description" content="Descubre en 2 minutos cuánto tiempo y dinero está perdiendo tu negocio por no tener automatización con IA."/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<link href="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/css/adsorb.webflow.shared.58204898c.css" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>WebFont.load({google:{families:["Sora:100,200,300,regular,500,600,700,800:latin,latin-ext"]}});</script>
+<link href="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64cf5d1c0aef8ef8c7af9673_fav.png" rel="shortcut icon" type="image/x-icon"/>
+<link rel="stylesheet" href="/css/animations.css"/>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a0a0c;
+  --card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+  --text: #ffffff;
+  --muted: rgba(255,255,255,0.55);
+  --purple: #7c3aed;
+  --purple-light: #a78bfa;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+}
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Sora', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+#shader-background { display: none !important; }
+
+/* NAV */
+.gl-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 2.5rem;
+  background: rgba(10,10,12,0.85); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.gl-logo { font-size: 1.6rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; text-decoration: none; }
+.gl-nav-links { display: flex; align-items: center; gap: 2rem; }
+.gl-nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+.gl-nav-links a:hover, .gl-nav-links a.active { color: #fff; }
+.gl-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.65rem 1.4rem; border: 1.5px solid rgba(255,255,255,0.5);
+  border-radius: 9999px; color: #fff; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s; white-space: nowrap;
+}
+.gl-btn:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
+.gl-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* PAGE */
+.calc-page {
+  min-height: 100vh;
+  padding: 8rem 1.5rem 6rem;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* HERO */
+.calc-hero { text-align: center; max-width: 680px; margin-bottom: 3.5rem; }
+.calc-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--purple-light); margin-bottom: 1.2rem;
+}
+.calc-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple-light); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.calc-hero h1 {
+  font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700;
+  line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.2rem;
+}
+.gl-gradient {
+  background: linear-gradient(135deg, #f97316 0%, #a855f7 50%, #6366f1 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  background-size: 250% auto; animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { 0%{background-position:0% center} 100%{background-position:-250% center} }
+.calc-hero p { font-size: 1rem; color: var(--muted); line-height: 1.7; }
+
+/* PROGRESS BAR */
+.calc-progress-wrap { width: 100%; max-width: 680px; margin-bottom: 2rem; }
+.calc-progress-labels {
+  display: flex; justify-content: space-between;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 0.6rem;
+}
+.calc-progress-labels span.active { color: var(--purple-light); }
+.calc-progress-track {
+  height: 3px; background: rgba(255,255,255,0.08); border-radius: 9999px; overflow: hidden;
+}
+.calc-progress-fill {
+  height: 100%; border-radius: 9999px;
+  background: linear-gradient(90deg, var(--purple), var(--purple-light));
+  transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* CARD */
+.calc-card {
+  width: 100%; max-width: 680px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 2.5rem;
+  box-shadow: 0 0 80px rgba(124,58,237,0.05);
+}
+
+/* STEPS */
+.calc-step { display: none; }
+.calc-step.active { display: block; animation: fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+.calc-step-num {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 0.6rem;
+}
+.calc-step h2 {
+  font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 0.6rem;
+}
+.calc-step .calc-step-desc {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 2rem;
+}
+
+/* INDUSTRY GRID */
+.industry-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 2rem;
+}
+.industry-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 1.1rem 0.5rem; border: 1.5px solid var(--border);
+  border-radius: 12px; background: transparent; color: var(--muted);
+  font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; text-align: center;
+}
+.industry-btn:hover { border-color: rgba(167,139,250,0.4); color: #fff; background: rgba(124,58,237,0.06); }
+.industry-btn.selected { border-color: var(--purple-light); color: #fff; background: rgba(124,58,237,0.12); }
+.industry-btn .icon { font-size: 1.6rem; line-height: 1; }
+
+/* SLIDERS */
+.calc-field { margin-bottom: 1.8rem; }
+.calc-field-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.8rem; }
+.calc-field-label { font-size: 0.88rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+.calc-field-value {
+  font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em;
+  color: var(--purple-light);
+}
+.calc-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px; border-radius: 9999px;
+  background: rgba(255,255,255,0.1); outline: none; cursor: pointer;
+}
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--purple-light); border: 3px solid #0a0a0c;
+  box-shadow: 0 0 12px rgba(167,139,250,0.5); cursor: pointer;
+  transition: transform 0.15s;
+}
+.calc-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.calc-field-hint { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+
+/* BUTTONS */
+.calc-btn-row { display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 0.5rem; }
+.calc-btn-back {
+  padding: 0.8rem 1.5rem; border: 1.5px solid var(--border);
+  border-radius: 9999px; background: transparent; color: var(--muted);
+  font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.calc-btn-back:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+.calc-btn-next {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.8rem; border: none; border-radius: 9999px;
+  background: linear-gradient(135deg, var(--purple), #6366f1);
+  color: #fff; font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 700;
+  cursor: pointer; transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 0 24px rgba(124,58,237,0.4);
+}
+.calc-btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+.calc-btn-next svg { width: 16px; height: 16px; }
+
+/* RESULTS */
+.results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.result-card {
+  padding: 1.2rem 1.4rem; border-radius: 14px;
+  border: 1px solid var(--border); background: rgba(255,255,255,0.02);
+}
+.result-card.highlight { border-color: rgba(167,139,250,0.3); background: rgba(124,58,237,0.08); }
+.result-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+.result-value { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.result-value.red { color: #f87171; }
+.result-value.green { color: #34d399; }
+.result-value.purple { background: linear-gradient(135deg,#e879f9,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.result-value.amber { color: #fbbf24; }
+.result-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; }
+
+.results-summary {
+  padding: 1.4rem; border-radius: 14px;
+  background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.2);
+  margin-bottom: 1.5rem;
+}
+.results-summary p { font-size: 0.92rem; color: rgba(255,255,255,0.8); line-height: 1.65; }
+.results-summary strong { color: #fff; font-weight: 700; }
+
+.cta-block { display: flex; flex-direction: column; gap: 0.75rem; }
+.cta-primary {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 2rem; border: none; border-radius: 9999px;
+  background: linear-gradient(135deg, var(--purple), #6366f1);
+  color: #fff; font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 700;
+  text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+  box-shadow: 0 0 32px rgba(124,58,237,0.4);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.cta-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+.cta-secondary {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 0.9rem 2rem; border: 1.5px solid rgba(37,211,102,0.4);
+  border-radius: 9999px; background: rgba(37,211,102,0.06);
+  color: #34d399; font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s;
+}
+.cta-secondary:hover { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.7); }
+.cta-note { text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+
+/* COUNTER ANIM */
+@keyframes countUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.result-value { animation: countUp 0.5s ease both; }
+
+/* SHARE ROW */
+.share-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+.share-label { font-size: 0.75rem; color: var(--muted); }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.9rem; border: 1px solid var(--border);
+  border-radius: 9999px; background: transparent;
+  color: var(--muted); font-family: 'Sora', sans-serif; font-size: 0.75rem; font-weight: 600;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.share-btn:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+
+/* WA FLOAT */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+  display: flex; align-items: center; gap: 0.6rem;
+  background: #25D366; color: #fff; border-radius: 9999px;
+  padding: 0.8rem 1.2rem 0.8rem 0.9rem; text-decoration: none;
+  font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.wa-float:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 32px rgba(37,211,102,0.55); animation: none; }
+.wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+@keyframes waPulse {
+  0%,100%{box-shadow:0 4px 24px rgba(37,211,102,0.4)}
+  50%{box-shadow:0 4px 32px rgba(37,211,102,0.7),0 0 0 8px rgba(37,211,102,0.08)}
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .gl-nav { padding: 1rem 1.2rem; }
+  .gl-nav-links a:not(.gl-btn) { display: none; }
+  .calc-card { padding: 1.5rem; }
+  .industry-grid { grid-template-columns: repeat(2, 1fr); }
+  .results-grid { grid-template-columns: 1fr; }
+  .wa-float { padding: 0.8rem; bottom: 1.5rem; right: 1.5rem; }
+  .wa-float span { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="gl-nav">
+  <a href="/" class="gl-logo">Glowlabs</a>
+  <div class="gl-nav-links">
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/casos">Casos de Éxito</a>
+    <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
+      Solicitar Diagnóstico <span class="dot"></span>
+    </a>
+  </div>
+</nav>
+
+<main class="calc-page">
+
+  <div class="calc-hero" data-anim="blur">
+    <div class="calc-eyebrow">
+      <span class="calc-eyebrow-dot"></span>
+      Calculadora de ROI
+    </div>
+    <h1>Descubre cuánto está <span class="gl-gradient">costándote</span> no automatizar.</h1>
+    <p>En 2 minutos sabrás exactamente cuántas horas pierdes, cuántos leads se escapan y cuánto dinero está dejando tu empresa sobre la mesa cada mes.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="calc-progress-wrap">
+    <div class="calc-progress-labels">
+      <span id="label-1" class="active">Tu negocio</span>
+      <span id="label-2">Operación</span>
+      <span id="label-3">Ventas</span>
+      <span id="label-4">Resultados</span>
+    </div>
+    <div class="calc-progress-track">
+      <div class="calc-progress-fill" id="progress-fill" style="width:25%"></div>
+    </div>
+  </div>
+
+  <!-- CARD -->
+  <div class="calc-card">
+
+    <!-- STEP 1: SECTOR -->
+    <div class="calc-step active" id="step-1">
+      <div class="calc-step-num">Paso 1 de 3</div>
+      <h2>¿A qué se dedica tu negocio?</h2>
+      <p class="calc-step-desc">Selecciona el sector que mejor describe lo que haces.</p>
+      <div class="industry-grid">
+        <button class="industry-btn" data-industry="clinica" onclick="selectIndustry(this)">
+          <span class="icon">🏥</span>Clínica / Salud
+        </button>
+        <button class="industry-btn" data-industry="inmobiliaria" onclick="selectIndustry(this)">
+          <span class="icon">🏠</span>Inmobiliaria
+        </button>
+        <button class="industry-btn" data-industry="ecommerce" onclick="selectIndustry(this)">
+          <span class="icon">🛒</span>E-commerce
+        </button>
+        <button class="industry-btn" data-industry="consultora" onclick="selectIndustry(this)">
+          <span class="icon">💼</span>Consultoría / B2B
+        </button>
+        <button class="industry-btn" data-industry="restaurante" onclick="selectIndustry(this)">
+          <span class="icon">🍽️</span>Restaurante / F&B
+        </button>
+        <button class="industry-btn" data-industry="otro" onclick="selectIndustry(this)">
+          <span class="icon">⚡</span>Otro sector
+        </button>
+      </div>
+      <div class="calc-btn-row">
+        <button class="calc-btn-next" id="btn-next-1" onclick="goStep(2)" disabled style="opacity:0.4;cursor:not-allowed">
+          Siguiente
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: OPERACIÓN -->
+    <div class="calc-step" id="step-2">
+      <div class="calc-step-num">Paso 2 de 3</div>
+      <h2>¿Cómo funciona tu operación hoy?</h2>
+      <p class="calc-step-desc">Mueve los sliders para ajustar a tu situación actual.</p>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Leads o consultas que recibes por mes</label>
+          <span class="calc-field-value" id="val-leads">150</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-leads" min="10" max="1000" value="150" step="10"
+          oninput="updateSlider('leads', this.value)"/>
+        <div class="calc-field-hint">Suma todos los canales: WhatsApp, Instagram, web, teléfono…</div>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Tiempo de respuesta promedio (horas)</label>
+          <span class="calc-field-value" id="val-respuesta">4h</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-respuesta" min="0.5" max="48" value="4" step="0.5"
+          oninput="updateSlider('respuesta', this.value)"/>
+        <div class="calc-field-hint">Cuánto tarda tu equipo en responder a un lead nuevo</div>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Horas semanales en tareas manuales/admin</label>
+          <span class="calc-field-value" id="val-horas">20h</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-horas" min="2" max="80" value="20" step="1"
+          oninput="updateSlider('horas', this.value)"/>
+        <div class="calc-field-hint">Seguimientos, agendamiento, propuestas, documentos…</div>
+      </div>
+
+      <div class="calc-btn-row">
+        <button class="calc-btn-back" onclick="goStep(1)">← Atrás</button>
+        <button class="calc-btn-next" onclick="goStep(3)">
+          Siguiente
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: VENTAS -->
+    <div class="calc-step" id="step-3">
+      <div class="calc-step-num">Paso 3 de 3</div>
+      <h2>Un poco sobre tus ventas</h2>
+      <p class="calc-step-desc">Esto nos permite calcular el impacto económico real.</p>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Tasa de conversión actual de leads (%)</label>
+          <span class="calc-field-value" id="val-conversion">15%</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-conversion" min="1" max="60" value="15" step="1"
+          oninput="updateSlider('conversion', this.value)"/>
+        <div class="calc-field-hint">De cada 100 leads, ¿cuántos se convierten en clientes?</div>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Ticket promedio por cliente (€)</label>
+          <span class="calc-field-value" id="val-ticket">€800</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-ticket" min="50" max="10000" value="800" step="50"
+          oninput="updateSlider('ticket', this.value)"/>
+        <div class="calc-field-hint">Valor medio de venta o proyecto</div>
+      </div>
+
+      <div class="calc-field">
+        <div class="calc-field-header">
+          <label class="calc-field-label">Personas en tu equipo comercial/admin</label>
+          <span class="calc-field-value" id="val-equipo">3</span>
+        </div>
+        <input type="range" class="calc-slider" id="slider-equipo" min="1" max="30" value="3" step="1"
+          oninput="updateSlider('equipo', this.value)"/>
+      </div>
+
+      <div class="calc-btn-row">
+        <button class="calc-btn-back" onclick="goStep(2)">← Atrás</button>
+        <button class="calc-btn-next" onclick="calcular()">
+          Calcular mi ROI
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 4: RESULTADOS -->
+    <div class="calc-step" id="step-4">
+      <div class="calc-step-num">Diagnóstico completo</div>
+      <h2 id="results-headline">Tu negocio tiene un alto potencial sin explotar.</h2>
+
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="result-label">Leads perdidos / mes</div>
+          <div class="result-value red" id="res-leads-perdidos">—</div>
+          <div class="result-sub">por respuesta lenta o sin seguimiento</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">Horas perdidas / mes</div>
+          <div class="result-value amber" id="res-horas-perdidas">—</div>
+          <div class="result-sub">en tareas que pueden automatizarse</div>
+        </div>
+        <div class="result-card">
+          <div class="result-label">Ingresos no captados / mes</div>
+          <div class="result-value red" id="res-ingresos-perdidos">—</div>
+          <div class="result-sub">oportunidades que se escapan</div>
+        </div>
+        <div class="result-card highlight">
+          <div class="result-label">Potencial de recuperación</div>
+          <div class="result-value purple" id="res-potencial">—</div>
+          <div class="result-sub">ingresos extra posibles con automatización</div>
+        </div>
+      </div>
+
+      <div class="results-summary">
+        <p id="results-text">—</p>
+      </div>
+
+      <div class="cta-block">
+        <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="cta-primary">
+          Quiero recuperar este potencial →
+        </a>
+        <a href="https://wa.me/34617927277?text=Hola%2C%20hice%20la%20calculadora%20de%20ROI%20y%20quiero%20saber%20c%C3%B3mo%20recuperar%20ese%20potencial%20%F0%9F%91%8B" target="_blank" class="cta-secondary">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hablar por WhatsApp
+        </a>
+        <div class="calc-btn-row" style="justify-content:center;margin-top:0.5rem">
+          <button class="calc-btn-back" onclick="goStep(1)">Recalcular</button>
+        </div>
+        <p class="cta-note">Sin compromiso · Diagnóstico gratuito</p>
+      </div>
+    </div>
+
+  </div><!-- /calc-card -->
+
+</main>
+
+<!-- WhatsApp Flotante -->
+<a href="https://wa.me/34617927277?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20GlowLabs%20%F0%9F%91%8B" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>¿Hablamos?</span>
+</a>
+
+<script src="/js/animations.js"></script>
+<script>
+// ── STATE ──────────────────────────────────────────────
+var state = {
+  industry: null,
+  leads: 150,
+  respuesta: 4,
+  horas: 20,
+  conversion: 15,
+  ticket: 800,
+  equipo: 3
+};
+
+// ── INDUSTRY ───────────────────────────────────────────
+function selectIndustry(btn) {
+  document.querySelectorAll('.industry-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  state.industry = btn.dataset.industry;
+  var nextBtn = document.getElementById('btn-next-1');
+  nextBtn.disabled = false;
+  nextBtn.style.opacity = '1';
+  nextBtn.style.cursor = 'pointer';
+}
+
+// ── SLIDERS ────────────────────────────────────────────
+function updateSlider(key, value) {
+  state[key] = parseFloat(value);
+  var display = '';
+  if (key === 'leads')      display = Math.round(value);
+  if (key === 'respuesta')  display = parseFloat(value) + 'h';
+  if (key === 'horas')      display = Math.round(value) + 'h';
+  if (key === 'conversion') display = Math.round(value) + '%';
+  if (key === 'ticket')     display = '€' + parseInt(value).toLocaleString('es-ES');
+  if (key === 'equipo')     display = Math.round(value);
+  document.getElementById('val-' + key).textContent = display;
+
+  // Update slider fill color
+  var slider = document.getElementById('slider-' + key);
+  var pct = ((value - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.background = 'linear-gradient(90deg, #7c3aed ' + pct + '%, rgba(255,255,255,0.1) ' + pct + '%)';
+}
+
+// Initialize slider fills
+['leads','respuesta','horas','conversion','ticket','equipo'].forEach(function(key) {
+  var slider = document.getElementById('slider-' + key);
+  if (slider) updateSlider(key, slider.value);
+});
+
+// ── STEPS ──────────────────────────────────────────────
+function goStep(n) {
+  document.querySelectorAll('.calc-step').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('step-' + n).classList.add('active');
+
+  // Progress bar
+  var pct = (n / 4) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+
+  // Labels
+  ['label-1','label-2','label-3','label-4'].forEach(function(id, i){
+    document.getElementById(id).classList.toggle('active', i + 1 === n);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── CALCULATE ──────────────────────────────────────────
+function calcular() {
+  var leads      = state.leads;
+  var respuesta  = state.respuesta;
+  var horas      = state.horas;
+  var conversion = state.conversion / 100;
+  var ticket     = state.ticket;
+  var equipo     = state.equipo;
+
+  // Leads perdidos por respuesta lenta
+  // Cada hora de retraso = ~10% más probabilidad de perder el lead
+  var factorPerdida = Math.min(0.85, respuesta * 0.1);
+  var leadsPerdidos = Math.round(leads * factorPerdida);
+
+  // Horas perdidas al mes en tareas manuales automatizables (~70%)
+  var horasMes = horas * 4; // semanas al mes
+  var horasAutomatizables = Math.round(horasMes * 0.7);
+
+  // Ingresos no captados por leads perdidos
+  var ingresosPerdidos = Math.round(leadsPerdidos * conversion * ticket);
+
+  // Potencial de recuperación (leads recuperados × mejora conversión con IA ~30%)
+  var leadsRecuperables = Math.round(leadsPerdidos * 0.75);
+  var mejorConversion = Math.min(conversion * 1.3, 0.7);
+  var potencial = Math.round(leadsRecuperables * mejorConversion * ticket);
+
+  // Mostrar resultados
+  document.getElementById('res-leads-perdidos').textContent = leadsPerdidos + ' leads';
+  document.getElementById('res-horas-perdidas').textContent = horasAutomatizables + 'h';
+  document.getElementById('res-ingresos-perdidos').textContent = '€' + ingresosPerdidos.toLocaleString('es-ES');
+  document.getElementById('res-potencial').textContent = '€' + potencial.toLocaleString('es-ES') + '/mes';
+
+  // Headline personalizado
+  var headlines = {
+    clinica: 'Tu clínica está dejando pacientes sin atender.',
+    inmobiliaria: 'Tu inmobiliaria está perdiendo compradores cada día.',
+    ecommerce: 'Tu tienda está perdiendo ventas mientras duermes.',
+    consultora: 'Tu equipo gasta demasiado tiempo en tareas que no generan valor.',
+    restaurante: 'Tu restaurante está perdiendo reservas y clientes recurrentes.',
+    otro: 'Tu negocio tiene un alto potencial sin explotar.'
+  };
+  document.getElementById('results-headline').textContent = headlines[state.industry] || headlines.otro;
+
+  // Summary text
+  var summaryHtml = 'Con los datos que nos diste, tu negocio está perdiendo aproximadamente ' +
+    '<strong>' + leadsPerdidos + ' leads al mes</strong> por tiempo de respuesta y falta de seguimiento, ' +
+    'y tu equipo dedica <strong>' + horasAutomatizables + ' horas mensuales</strong> a tareas repetitivas ' +
+    'que podrían automatizarse. Eso representa <strong>€' + ingresosPerdidos.toLocaleString('es-ES') +
+    ' en ingresos no capturados</strong> cada mes. Con un sistema de automatización adecuado, ' +
+    'podrías recuperar hasta <strong>€' + potencial.toLocaleString('es-ES') + ' adicionales al mes</strong>.';
+
+  document.getElementById('results-text').innerHTML = summaryHtml;
+
+  goStep(4);
+}
+</script>
+</body>
+</html>
