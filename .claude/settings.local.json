@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import transformers, torch, soundfile; print\\('disponible'\\)\")",
+      "Bash(python3 -c \"import json,sys; words=json.load\\(sys.stdin\\); print\\(f'{len\\(words\\)} palabras'\\); [print\\(f'{w[\\\\\"start\\\\\"]:.1f}s - {w[\\\\\"end\\\\\"]:.1f}s: {w[\\\\\"text\\\\\"]}'\\) for w in words[:10]]\")",
+      "Bash(find ~/Desktop -name \"*.mp3\" -o -name \"*.wav\" -o -name \"*.m4a\" 2>/dev/null | head -20)",
+      "Bash(cat /Users/mafemontilla/.claude/skills/hyperframes-media/references/captions/authoring.md)",
+      "Bash(cat /Users/mafemontilla/.claude/skills/hyperframes-core/references/data-attributes.md 2>/dev/null | head -100)",
+      "Bash(npm run *)",
+      "WebSearch",
+      "WebFetch(domain:www.pexels.com)",
+      "WebFetch(domain:mixkit.co)"
+    ]
+  }
+}
