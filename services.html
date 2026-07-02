@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>GlowLabs - Servicios</title>
-<meta name="description" content="Captación inteligente, ventas automatizadas y fidelización con IA. Tres paquetes para transformar tu negocio."/>
+<title>GlowLabs - Sistema Operativo para tu Empresa</title>
+<meta name="description" content="Instalamos el sistema operativo completo de tu empresa: captación, automatización, ventas, marketing y software a medida con Inteligencia Artificial."/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <link href="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/css/adsorb.webflow.shared.58204898c.css" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -25,7 +25,6 @@
   --blue: #1a56db;
   --green: #059669;
   --sidebar-w: 220px;
-  --content-left: 280px;
 }
 
 html, body {
@@ -36,7 +35,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* Hide Webflow purple waves everywhere */
 #shader-background { display: none !important; }
 
 /* ===== NAV ===== */
@@ -52,7 +50,6 @@ html, body {
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
 .gl-logo {
   font-size: 1.6rem;
   font-weight: 800;
@@ -60,13 +57,11 @@ html, body {
   letter-spacing: -0.03em;
   text-decoration: none;
 }
-
 .gl-nav-links {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-
 .gl-nav-links a {
   color: rgba(255,255,255,0.75);
   text-decoration: none;
@@ -76,7 +71,6 @@ html, body {
 }
 .gl-nav-links a:hover { color: #fff; }
 .gl-nav-links a.active { color: #fff; }
-
 .gl-btn {
   display: inline-flex;
   align-items: center;
@@ -110,57 +104,80 @@ html, body {
   overflow: hidden;
   padding: 8rem 2.5rem 4rem;
 }
-
 .gl-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 560px;
+  max-width: 620px;
 }
-
+.gl-hero-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1.5rem;
+}
 .gl-hero h1 {
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 }
-
 .gl-gradient {
   background: linear-gradient(135deg, #f97316 0%, #a855f7 50%, #6366f1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .gl-gradient-purple {
   background: linear-gradient(135deg, #e879f9 0%, #7c3aed 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .gl-gradient-blue {
   background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .gl-gradient-green {
   background: linear-gradient(135deg, #34d399 0%, #059669 50%, #047857 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
+.gl-gradient-amber {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .gl-hero p {
   font-size: 1.05rem;
   color: var(--text-muted);
   line-height: 1.65;
   margin-bottom: 2.5rem;
 }
-
-/* Dots animation in hero */
+.gl-hero-stats {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.gl-hero-stat strong {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.gl-hero-stat span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  font-weight: 500;
+}
 .gl-hero-dots {
   position: absolute;
   right: 0; top: 0;
@@ -168,369 +185,7 @@ html, body {
   height: 100%;
   pointer-events: none;
 }
-
-.gl-hero-lottie {
-  width: 100%;
-  height: 100%;
-}
-
-.scroll-down-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  z-index: 2;
-}
-
-.scroll-dots {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  align-items: center;
-}
-
-.scroll-dots span {
-  display: block;
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: var(--text-muted);
-  animation: scrollPulse 1.5s ease-in-out infinite;
-}
-.scroll-dots span:nth-child(2) { animation-delay: 0.2s; }
-.scroll-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-/* ===== SERVICES WRAPPER ===== */
-.gl-services-wrapper {
-  position: relative;
-  display: flex;
-  background: var(--bg);
-}
-
-/* Left sidebar */
-.gl-sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  display: flex;
-  align-items: flex-start;
-  padding-top: 40vh;
-  padding-left: 2.5rem;
-}
-
-.gl-sidebar-inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.gl-sidebar-line {
-  position: absolute;
-  left: 6px;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(255,255,255,0.15);
-}
-
-.gl-sidebar-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem 0;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.gl-sidebar-dot {
-  width: 13px; height: 13px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  background: var(--bg);
-  flex-shrink: 0;
-  z-index: 1;
-  transition: background 0.3s, border-color 0.3s;
-}
-
-.gl-sidebar-item.active .gl-sidebar-dot,
-.gl-sidebar-item:hover .gl-sidebar-dot {
-  background: #fff;
-  border-color: #fff;
-}
-
-.gl-sidebar-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 0.02em;
-  transition: color 0.3s;
-  white-space: nowrap;
-}
-
-.gl-sidebar-item.active .gl-sidebar-label,
-.gl-sidebar-item:hover .gl-sidebar-label {
-  color: rgba(255,255,255,0.9);
-}
-
-/* ===== SERVICE SECTIONS ===== */
-.gl-services-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.gl-service-section {
-  padding: 7rem 4rem 7rem 2rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  text-align: center;
-}
-
-.gl-service-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.gl-service-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.gl-service-title {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-bottom: 1.5rem;
-}
-
-.gl-service-desc {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  max-width: 640px;
-  margin: 0 auto 3rem;
-}
-
-/* Visual panel */
-.gl-service-visual {
-  width: 100%;
-  height: 280px;
-  border-radius: 1rem;
-  margin-bottom: 3.5rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.gl-service-visual.purple-visual {
-  background: linear-gradient(135deg, #3b0764 0%, #7c3aed 50%, #a78bfa 100%);
-}
-.gl-service-visual.blue-visual {
-  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #60a5fa 100%);
-}
-.gl-service-visual.green-visual {
-  background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #6ee7b7 100%);
-}
-
-.gl-service-visual-inner {
-  text-align: center;
-  color: rgba(255,255,255,0.6);
-}
-
-.gl-service-visual-inner .big-num {
-  font-size: 5rem;
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: rgba(255,255,255,0.15);
-}
-
-/* Features grid */
-.gl-features-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin: 0 auto 3rem;
-  max-width: 720px;
-}
-
-.gl-feature-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.gl-feature-icon-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-bottom: 0.3rem;
-}
-
-.gl-feature-icon-wrap svg {
-  width: 20px; height: 20px;
-  color: rgba(255,255,255,0.5);
-  flex-shrink: 0;
-}
-
-.gl-feature-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: rgba(255,255,255,0.85);
-}
-
-.gl-feature-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-  text-align: center;
-}
-
-/* CTA block */
-.gl-service-cta {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  max-width: 640px;
-  margin-bottom: 2rem;
-}
-
-/* ===== FOOTER ===== */
-.gl-footer {
-  background: #0c0d0f;
-  padding: 5rem 2.5rem;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-
-.gl-footer-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.gl-footer h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.2rem;
-}
-
-.gl-footer p {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 0.8rem;
-  max-width: 580px;
-}
-
-.gl-footer-buttons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 2rem;
-}
-
-.gl-footer-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.gl-footer-logo {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.03em;
-  text-decoration: none;
-}
-
-.gl-copyright {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-/* ===== ELEGANT SHAPES ===== */
-@keyframes shapeEntry1 {
-  from { opacity: 0; transform: translateY(-150px) rotate(-3deg); }
-  to   { opacity: 1; transform: translateY(0px) rotate(12deg); }
-}
-@keyframes shapeEntry2 {
-  from { opacity: 0; transform: translateY(-150px) rotate(-30deg); }
-  to   { opacity: 1; transform: translateY(0px) rotate(-15deg); }
-}
-@keyframes shapeEntry3 {
-  from { opacity: 0; transform: translateY(-150px) rotate(-23deg); }
-  to   { opacity: 1; transform: translateY(0px) rotate(-8deg); }
-}
-@keyframes shapeEntry4 {
-  from { opacity: 0; transform: translateY(-150px) rotate(5deg); }
-  to   { opacity: 1; transform: translateY(0px) rotate(20deg); }
-}
-@keyframes shapeEntry5 {
-  from { opacity: 0; transform: translateY(-150px) rotate(-40deg); }
-  to   { opacity: 1; transform: translateY(0px) rotate(-25deg); }
-}
-@keyframes shapeFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(15px); }
-}
-
-.gl-shape-wrap {
-  position: absolute;
-  animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.23, 0.86, 0.39, 0.96);
-  animation-duration: 2.4s;
-  pointer-events: none;
-}
-.gl-shape-float {
-  animation: shapeFloat 12s ease-in-out infinite;
-}
-.gl-shape-pill {
-  border-radius: 9999px;
-  background: linear-gradient(to right, var(--shape-color, rgba(255,255,255,0.08)), transparent);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  border: 2px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 32px 0 rgba(255,255,255,0.1);
-  position: relative;
-  overflow: hidden;
-}
-.gl-shape-pill::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2), transparent 70%);
-}
+.gl-hero-lottie { width: 100%; height: 100%; }
 .gl-hero-bg-glow {
   position: absolute;
   inset: 0;
@@ -547,23 +202,290 @@ html, body {
   pointer-events: none;
   z-index: 1;
 }
+.scroll-down-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+.scroll-dots { display: flex; flex-direction: column; gap: 3px; align-items: center; }
+.scroll-dots span {
+  display: block; width: 4px; height: 4px;
+  border-radius: 50%; background: var(--text-muted);
+  animation: scrollPulse 1.5s ease-in-out infinite;
+}
+.scroll-dots span:nth-child(2) { animation-delay: 0.2s; }
+.scroll-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+/* Floating shapes */
+@keyframes shapeEntry1 { from{opacity:0;transform:translateY(-150px) rotate(-3deg)} to{opacity:1;transform:translateY(0) rotate(12deg)} }
+@keyframes shapeEntry2 { from{opacity:0;transform:translateY(-150px) rotate(-30deg)} to{opacity:1;transform:translateY(0) rotate(-15deg)} }
+@keyframes shapeEntry3 { from{opacity:0;transform:translateY(-150px) rotate(-23deg)} to{opacity:1;transform:translateY(0) rotate(-8deg)} }
+@keyframes shapeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(15px)} }
+.gl-shape-wrap { position:absolute;animation-fill-mode:both;animation-timing-function:cubic-bezier(0.23,0.86,0.39,0.96);animation-duration:2.4s;pointer-events:none; }
+.gl-shape-float { animation:shapeFloat 12s ease-in-out infinite; }
+.gl-shape-pill { border-radius:9999px;background:linear-gradient(to right,var(--shape-color,rgba(255,255,255,0.08)),transparent);backdrop-filter:blur(2px);border:2px solid rgba(255,255,255,0.15);box-shadow:0 8px 32px 0 rgba(255,255,255,0.1); }
+
+/* ===== SERVICES WRAPPER ===== */
+.gl-services-wrapper {
+  position: relative;
+  display: flex;
+  background: var(--bg);
+}
+.gl-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 40vh;
+  padding-left: 2.5rem;
+}
+.gl-sidebar-inner { position: relative; display: flex; flex-direction: column; gap: 0; }
+.gl-sidebar-line { position:absolute;left:6px;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.15); }
+.gl-sidebar-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1rem 0; cursor: pointer; text-decoration: none;
+}
+.gl-sidebar-dot {
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  background: var(--bg); flex-shrink: 0; z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
+}
+.gl-sidebar-item.active .gl-sidebar-dot,
+.gl-sidebar-item:hover .gl-sidebar-dot { background: #fff; border-color: #fff; }
+.gl-sidebar-label {
+  font-size: 0.75rem; font-weight: 500;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.02em;
+  transition: color 0.3s; white-space: nowrap;
+}
+.gl-sidebar-item.active .gl-sidebar-label,
+.gl-sidebar-item:hover .gl-sidebar-label { color: rgba(255,255,255,0.9); }
+
+/* ===== SERVICE SECTIONS ===== */
+.gl-services-content { flex: 1; min-width: 0; }
+
+.gl-service-section {
+  padding: 7rem 4rem 7rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  text-align: center;
+}
+
+.gl-service-icon {
+  width: 56px; height: 56px;
+  margin: 0 auto 2rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.gl-service-icon svg { width: 100%; height: 100%; }
+
+.gl-service-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 1rem;
+}
+
+.gl-service-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.gl-service-subtitle {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.5);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.gl-service-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 660px;
+  margin: 0 auto 3rem;
+}
+
+/* Visual panel */
+.gl-service-visual {
+  width: 100%; height: 220px;
+  border-radius: 1rem; margin-bottom: 3.5rem;
+  overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+  position: relative;
+}
+.gl-service-visual.purple-visual { background: linear-gradient(135deg, #3b0764 0%, #7c3aed 50%, #a78bfa 100%); }
+.gl-service-visual.blue-visual   { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #60a5fa 100%); }
+.gl-service-visual.green-visual  { background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #6ee7b7 100%); }
+.gl-service-visual.amber-visual  { background: linear-gradient(135deg, #78350f 0%, #d97706 50%, #fbbf24 100%); }
+.gl-service-visual-inner { text-align: center; }
+.gl-service-visual-inner .big-num {
+  font-size: 6rem; font-weight: 800;
+  letter-spacing: -0.05em; line-height: 1;
+  color: rgba(255,255,255,0.12);
+}
+.gl-visual-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.5rem;
+}
+
+/* ===== TAGS LIST ===== */
+.gl-tags-wrap {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+}
+.gl-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+.gl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  transition: border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.gl-tag:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); }
+.gl-tag-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+.gl-tag.purple { border-color: rgba(168,85,247,0.25); color: #c084fc; background: rgba(168,85,247,0.06); }
+.gl-tag.blue   { border-color: rgba(96,165,250,0.25); color: #93c5fd; background: rgba(96,165,250,0.06); }
+.gl-tag.green  { border-color: rgba(52,211,153,0.25); color: #6ee7b7; background: rgba(52,211,153,0.06); }
+.gl-tag.amber  { border-color: rgba(251,191,36,0.25); color: #fcd34d; background: rgba(251,191,36,0.06); }
+
+/* Sub-categories inside service 3 */
+.gl-subcategories {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+.gl-subcat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* CTA block */
+.gl-service-cta-box {
+  max-width: 660px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem 2rem;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  text-align: left;
+}
+.gl-service-cta-box p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.gl-service-cta-box strong {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+/* ===== SOLUCIONES A MEDIDA ===== */
+.gl-custom-section {
+  padding: 6rem 4rem 6rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
+.gl-footer {
+  background: #0c0d0f;
+  padding: 5rem 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.gl-footer-inner {
+  max-width: 760px; margin: 0 auto;
+  text-align: center; display: flex;
+  flex-direction: column; align-items: center;
+}
+.gl-footer h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.03em; margin-bottom: 1.2rem;
+}
+.gl-footer p {
+  font-size: 1rem; color: var(--text-muted);
+  line-height: 1.7; margin-bottom: 0.8rem; max-width: 580px;
+}
+.gl-footer-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+.gl-footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 4rem; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap; gap: 1rem;
+}
+.gl-footer-logo {
+  font-size: 1.6rem; font-weight: 800;
+  color: #fff; letter-spacing: -0.03em; text-decoration: none;
+}
+.gl-copyright { font-size: 0.8rem; color: var(--text-muted); }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .gl-sidebar { display: none; }
-  .gl-service-section { padding: 4rem 1.5rem; }
-  .gl-features-grid { grid-template-columns: 1fr; }
+  .gl-service-section { padding: 5rem 1.5rem; }
+  .gl-custom-section { padding: 4rem 1.5rem; }
   .gl-hero { padding: 7rem 1.5rem 4rem; }
   .gl-hero-dots { width: 100%; opacity: 0.3; }
   .gl-nav { padding: 1rem 1.5rem; }
-  .gl-nav-links { gap: 1rem; }
+  .gl-hero-stats { gap: 1.5rem; }
 }
-
 @media (max-width: 600px) {
   .gl-nav-links a:not(.gl-btn) { display: none; }
   .gl-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
   .gl-service-section { padding: 3rem 1.2rem; }
-  .gl-footer-inner { padding: 3rem 1.2rem; }
+  .gl-custom-section { padding: 3rem 1.2rem; }
+  .gl-hero-stats { flex-direction: column; gap: 1rem; }
+  .gl-service-cta-box { padding: 1.2rem; }
 }
 </style>
 <link rel="stylesheet" href="/css/animations.css"/>
@@ -586,68 +508,55 @@ html, body {
 
 <!-- HERO -->
 <section class="gl-hero">
-
-  <!-- Background glow -->
   <div class="gl-hero-bg-glow"></div>
 
-  <!-- Elegant shapes -->
   <div class="gl-shape-wrap" style="left:-5%;top:20%;animation-name:shapeEntry1;animation-delay:0.3s">
-    <div class="gl-shape-float">
-      <div class="gl-shape-pill" style="width:600px;height:140px;--shape-color:rgba(99,102,241,0.15)"></div>
-    </div>
+    <div class="gl-shape-float"><div class="gl-shape-pill" style="width:600px;height:140px;--shape-color:rgba(99,102,241,0.15)"></div></div>
   </div>
   <div class="gl-shape-wrap" style="right:0%;top:70%;animation-name:shapeEntry2;animation-delay:0.5s">
-    <div class="gl-shape-float" style="animation-delay:2s">
-      <div class="gl-shape-pill" style="width:500px;height:120px;--shape-color:rgba(244,63,94,0.15)"></div>
-    </div>
+    <div class="gl-shape-float" style="animation-delay:2s"><div class="gl-shape-pill" style="width:500px;height:120px;--shape-color:rgba(168,85,247,0.15)"></div></div>
   </div>
   <div class="gl-shape-wrap" style="left:10%;bottom:10%;animation-name:shapeEntry3;animation-delay:0.4s">
-    <div class="gl-shape-float" style="animation-delay:1s">
-      <div class="gl-shape-pill" style="width:300px;height:80px;--shape-color:rgba(139,92,246,0.15)"></div>
-    </div>
-  </div>
-  <div class="gl-shape-wrap" style="right:20%;top:15%;animation-name:shapeEntry4;animation-delay:0.6s">
-    <div class="gl-shape-float" style="animation-delay:3s">
-      <div class="gl-shape-pill" style="width:200px;height:60px;--shape-color:rgba(245,158,11,0.15)"></div>
-    </div>
-  </div>
-  <div class="gl-shape-wrap" style="left:25%;top:8%;animation-name:shapeEntry5;animation-delay:0.7s">
-    <div class="gl-shape-float" style="animation-delay:4s">
-      <div class="gl-shape-pill" style="width:150px;height:40px;--shape-color:rgba(6,182,212,0.15)"></div>
-    </div>
+    <div class="gl-shape-float" style="animation-delay:1s"><div class="gl-shape-pill" style="width:300px;height:80px;--shape-color:rgba(139,92,246,0.15)"></div></div>
   </div>
 
-  <!-- Top/bottom fade overlay -->
   <div class="gl-hero-overlay"></div>
 
-  <!-- Dots animation (same lottie as homepage) -->
   <div class="gl-hero-dots">
     <div class="gl-hero-lottie"
-      data-w-id="srv-lottie-dots"
       data-animation-type="lottie"
       data-src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64f885c762524263f8706468_adsorb_graphic_element_safari.json"
-      data-loop="1"
-      data-direction="1"
-      data-autoplay="1"
-      data-is-ix2-target="0"
-      data-renderer="svg"
-      data-duration="0"
-      data-loading="eager"
-    ></div>
+      data-loop="1" data-direction="1" data-autoplay="1"
+      data-is-ix2-target="0" data-renderer="svg"
+      data-duration="0" data-loading="eager">
+    </div>
   </div>
 
   <div class="gl-hero-content" data-anim="blur">
-    <h1>Glowlabs opera con tres <span class="gl-gradient">paquetes de servicio</span></h1>
-    <p>Diseñamos sistemas de inteligencia artificial adaptados a cada etapa de tu negocio: captar, vender y fidelizar. Todo automatizado, todo medible.</p>
+    <p class="gl-hero-eyebrow">Lo que hacemos</p>
+    <h1>Instalamos el <span class="gl-gradient">sistema operativo</span> de tu empresa.</h1>
+    <p>Automatizamos toda la operación comercial de tu negocio con Inteligencia Artificial. Desde el primer contacto con un cliente hasta que vuelve a comprar — todo conectado, todo funcionando solo.</p>
+    <div class="gl-hero-stats">
+      <div class="gl-hero-stat">
+        <strong class="gl-gradient">4</strong>
+        <span>bloques de servicio</span>
+      </div>
+      <div class="gl-hero-stat">
+        <strong class="gl-gradient">100+</strong>
+        <span>automatizaciones posibles</span>
+      </div>
+      <div class="gl-hero-stat">
+        <strong class="gl-gradient">24/7</strong>
+        <span>operación autónoma</span>
+      </div>
+    </div>
     <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
       Solicitar Diagnóstico <span class="dot"></span>
     </a>
   </div>
 
   <div class="scroll-down-hint">
-    <div class="scroll-dots">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="scroll-dots"><span></span><span></span><span></span></div>
     Scroll down
   </div>
 </section>
@@ -658,21 +567,25 @@ html, body {
 <!-- SERVICES -->
 <div class="gl-services-wrapper">
 
-  <!-- LEFT SIDEBAR -->
+  <!-- SIDEBAR -->
   <aside class="gl-sidebar">
     <div class="gl-sidebar-inner">
       <div class="gl-sidebar-line"></div>
-      <a href="#captacion" class="gl-sidebar-item active" data-section="captacion">
+      <a href="#comercial" class="gl-sidebar-item active" data-section="comercial">
         <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Captación Inteligente</span>
+        <span class="gl-sidebar-label">Sistema Comercial</span>
       </a>
-      <a href="#ventas" class="gl-sidebar-item" data-section="ventas">
+      <a href="#automatizacion" class="gl-sidebar-item" data-section="automatizacion">
         <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Ventas Automatizadas</span>
+        <span class="gl-sidebar-label">Automatización</span>
       </a>
-      <a href="#fidelizacion" class="gl-sidebar-item" data-section="fidelizacion">
+      <a href="#crecimiento" class="gl-sidebar-item" data-section="crecimiento">
         <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Fidelización y Recompra</span>
+        <span class="gl-sidebar-label">Crecimiento</span>
+      </a>
+      <a href="#medida" class="gl-sidebar-item" data-section="medida">
+        <span class="gl-sidebar-dot"></span>
+        <span class="gl-sidebar-label">A Medida</span>
       </a>
     </div>
   </aside>
@@ -680,212 +593,272 @@ html, body {
   <!-- CONTENT -->
   <div class="gl-services-content">
 
-    <!-- ── SERVICE 1: CAPTACIÓN INTELIGENTE ── -->
-    <section class="gl-service-section" id="captacion" data-anim="up">
+    <!-- ── SERVICIO 1: SISTEMA COMERCIAL INTELIGENTE ── -->
+    <section class="gl-service-section" id="comercial" data-anim="up">
+
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="28" cy="28" r="27" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
-          <circle cx="28" cy="28" r="20" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="13" stroke="rgba(167,139,250,0.5)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="6" fill="rgba(167,139,250,0.7)"/>
+          <circle cx="28" cy="28" r="18" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+          <circle cx="28" cy="28" r="9"  stroke="rgba(167,139,250,0.5)" stroke-width="1"/>
+          <circle cx="28" cy="28" r="4"  fill="rgba(167,139,250,0.8)"/>
         </svg>
       </div>
 
-      <h2 class="gl-service-title">
-        <span class="gl-gradient-purple">Captación</span> Inteligente
-      </h2>
+      <p class="gl-service-num">Servicio 01</p>
+      <h2 class="gl-service-title"><span class="gl-gradient-purple">Sistema Comercial</span> Inteligente</h2>
+      <p class="gl-service-subtitle">Ningún lead se pierde. Toda la empresa trabaja sobre un solo sistema.</p>
 
       <p class="gl-service-desc">
-        Convertimos visitantes y contactos en oportunidades reales de negocio. Usamos inteligencia artificial para captar, calificar y nutrir leads de forma automática — 24/7, sin perder ninguna oportunidad.
+        Construimos la infraestructura completa de captación y gestión de clientes de tu empresa. Asistentes con inteligencia artificial que atienden, califican y organizan cada oportunidad de negocio — automáticamente, en todos tus canales, las 24 horas.
       </p>
 
       <div class="gl-service-visual purple-visual">
         <div class="gl-service-visual-inner">
           <div class="big-num">01</div>
+          <div class="gl-visual-label">Captación · Atención · CRM · Agendamiento</div>
         </div>
       </div>
 
-      <div class="gl-features-grid" data-stagger>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-            <span class="gl-feature-title">Asistentes IA para WhatsApp e Instagram</span>
-          </div>
-          <p class="gl-feature-desc">Respondemos automáticamente, clasificamos el interés y agendamos citas sin intervención humana.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-            <span class="gl-feature-title">Landing pages de alta conversión</span>
-          </div>
-          <p class="gl-feature-desc">Diseñamos páginas optimizadas para captar datos y convertir el tráfico en leads cualificados.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span class="gl-feature-title">Automatización de captación</span>
-          </div>
-          <p class="gl-feature-desc">Flujos automáticos que capturan leads desde múltiples canales y los centralizan en un solo sistema.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            <span class="gl-feature-title">Calificación automática de leads</span>
-          </div>
-          <p class="gl-feature-desc">La IA evalúa el nivel de interés de cada contacto y lo prioriza para que tu equipo se enfoque en los más listos para comprar.</p>
+      <div class="gl-tags-wrap">
+        <div class="gl-tags-list">
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asistente IA para WhatsApp</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asistente IA para Instagram</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Chat web inteligente</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Bots de voz con IA</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Atención automática 24/7</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Respuestas automáticas</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Captura automática de leads</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Formularios inteligentes</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Landing Pages</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Páginas web dinámicas</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Agendamiento automático</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Confirmación de citas</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Recordatorios de citas</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Reagendamiento automático</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Calificación automática de leads</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asignación al comercial adecuado</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>CRM organizado</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Gestión completa de clientes</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Pipeline comercial</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Historial de conversaciones</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Centralización de canales</span>
+          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Paneles de métricas</span>
         </div>
       </div>
 
-      <p class="gl-service-cta">
-        Trabaja con nosotros para construir un sistema de captación que nunca duerme. Más leads, mejor calificados, con menos esfuerzo de tu parte.
-      </p>
+      <div class="gl-service-cta-box">
+        <p><strong>El resultado:</strong> ningún lead se pierde, ninguna cita se olvida y toda tu empresa trabaja sobre un sistema organizado. Tu equipo deja de perseguir clientes — el sistema los atrae, los clasifica y los entrega listos para cerrar.</p>
+      </div>
 
       <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
         Solicitar Diagnóstico <span class="dot"></span>
       </a>
     </section>
 
-    <!-- ── SERVICE 2: VENTAS AUTOMATIZADAS ── -->
-    <section class="gl-service-section" id="ventas" data-anim="up">
+    <!-- ── SERVICIO 2: AUTOMATIZACIÓN DE VENTAS Y OPERACIONES ── -->
+    <section class="gl-service-section" id="automatizacion" data-anim="up">
+
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="4" y="4" width="48" height="48" rx="8" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
-          <rect x="12" y="20" width="8" height="20" fill="rgba(96,165,250,0.3)"/>
-          <rect x="24" y="14" width="8" height="26" fill="rgba(96,165,250,0.5)"/>
-          <rect x="36" y="8" width="8" height="32" fill="rgba(96,165,250,0.7)"/>
+          <path d="M16 28 L22 22 L28 26 L34 18 L40 24" stroke="rgba(96,165,250,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="16" cy="28" r="2.5" fill="rgba(96,165,250,0.6)"/>
+          <circle cx="28" cy="26" r="2.5" fill="rgba(96,165,250,0.6)"/>
+          <circle cx="40" cy="24" r="2.5" fill="rgba(96,165,250,0.9)"/>
         </svg>
       </div>
 
-      <h2 class="gl-service-title">
-        <span class="gl-gradient-blue">Ventas</span> Automatizadas
-      </h2>
+      <p class="gl-service-num">Servicio 02</p>
+      <h2 class="gl-service-title"><span class="gl-gradient-blue">Automatización</span> de Ventas y Operaciones</h2>
+      <p class="gl-service-subtitle">Tu empresa funciona incluso cuando nadie está trabajando.</p>
 
       <p class="gl-service-desc">
-        Convertimos tus leads en clientes con sistemas automatizados de seguimiento, propuestas y cierre. Tu equipo de ventas se enfoca en cerrar — el sistema hace el resto.
+        Eliminamos el trabajo repetitivo de tu equipo y automatizamos cada proceso comercial y operativo de tu negocio. Desde el seguimiento de un presupuesto hasta la gestión de documentos internos — todo funciona solo, sin errores, sin retrasos.
       </p>
 
       <div class="gl-service-visual blue-visual">
         <div class="gl-service-visual-inner">
           <div class="big-num">02</div>
+          <div class="gl-visual-label">Seguimiento · Propuestas · Procesos · Integraciones</div>
         </div>
       </div>
 
-      <div class="gl-features-grid" data-stagger>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            <span class="gl-feature-title">Seguimiento automático por email y WhatsApp</span>
-          </div>
-          <p class="gl-feature-desc">Secuencias de mensajes personalizados que mantienen el interés del prospecto hasta que está listo para comprar.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-            <span class="gl-feature-title">CRM con IA integrada</span>
-          </div>
-          <p class="gl-feature-desc">Gestión centralizada de todos tus prospectos con recomendaciones automáticas sobre el mejor momento y forma de contactar.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="gl-feature-title">Propuestas y cotizaciones automáticas</span>
-          </div>
-          <p class="gl-feature-desc">Generación y envío automático de propuestas personalizadas según el perfil de cada prospecto.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="gl-feature-title">Mayor tasa de cierre</span>
-          </div>
-          <p class="gl-feature-desc">Los prospectos reciben la información correcta en el momento correcto, lo que reduce fricciones y acelera la decisión de compra.</p>
+      <div class="gl-tags-wrap">
+        <div class="gl-tags-list">
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Seguimientos automáticos por WhatsApp</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Seguimientos automáticos por email</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Secuencias inteligentes</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Nutrición automática</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recuperación de oportunidades perdidas</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recuperación de presupuestos no aceptados</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de propuestas</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de cotizaciones</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de pagos</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización documental</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización administrativa</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización del onboarding</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recordatorios internos</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de tareas</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatizaciones personalizadas</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Integraciones entre plataformas</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Flujos completamente a medida</span>
+          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de procesos internos</span>
         </div>
       </div>
 
-      <p class="gl-service-cta">
-        Implementa un proceso de ventas que escala sin contratar más personal. Tu equipo comercial vende más con menos esfuerzo administrativo.
-      </p>
+      <div class="gl-service-cta-box">
+        <p><strong>El resultado:</strong> tu empresa trabaja mientras tú no estás. Cada proceso que hoy requiere intervención humana se convierte en un flujo automático — rápido, sin errores y completamente escalable.</p>
+      </div>
 
       <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
         Solicitar Diagnóstico <span class="dot"></span>
       </a>
     </section>
 
-    <!-- ── SERVICE 3: FIDELIZACIÓN Y RECOMPRA ── -->
-    <section class="gl-service-section" id="fidelizacion" data-anim="up">
+    <!-- ── SERVICIO 3: CRECIMIENTO, MARKETING Y FIDELIZACIÓN ── -->
+    <section class="gl-service-section" id="crecimiento" data-anim="up">
+
       <div class="gl-service-icon">
         <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M28 8 L48 18 L48 38 L28 48 L8 38 L8 18 Z" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" fill="none"/>
-          <path d="M28 16 L40 22 L40 34 L28 40 L16 34 L16 22 Z" fill="rgba(52,211,153,0.15)" stroke="rgba(52,211,153,0.5)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="5" fill="rgba(52,211,153,0.7)"/>
+          <path d="M28 18 L40 24 L40 34 L28 40 L16 34 L16 24 Z" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.5)" stroke-width="1"/>
+          <circle cx="28" cy="28" r="5" fill="rgba(52,211,153,0.8)"/>
         </svg>
       </div>
 
-      <h2 class="gl-service-title">
-        <span class="gl-gradient-green">Fidelización</span> y Recompra
-      </h2>
+      <p class="gl-service-num">Servicio 03</p>
+      <h2 class="gl-service-title"><span class="gl-gradient-green">Crecimiento,</span> Marketing y Fidelización</h2>
+      <p class="gl-service-subtitle">Generamos más tráfico cualificado. Nuestro sistema lo convierte en ventas automáticamente.</p>
 
       <p class="gl-service-desc">
-        Un cliente que ya te compró es tu activo más valioso. Diseñamos sistemas que mantienen la relación activa, generan recompras y convierten clientes en embajadores de tu marca.
+        No solo automatizamos — también hacemos crecer tu negocio. Diseñamos la estrategia para atraer más clientes ideales, construimos las campañas para captarlos y montamos los sistemas para que vuelvan a comprar una y otra vez.
       </p>
 
       <div class="gl-service-visual green-visual">
         <div class="gl-service-visual-inner">
           <div class="big-num">03</div>
+          <div class="gl-visual-label">Estrategia · Marketing · Fidelización</div>
         </div>
       </div>
 
-      <div class="gl-features-grid" data-stagger>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-            <span class="gl-feature-title">Programas de fidelización automatizados</span>
+      <div class="gl-subcategories">
+        <div>
+          <div class="gl-subcat-label">Estrategia</div>
+          <div class="gl-tags-list">
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategias de captación</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Embudos de conversión</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategia comercial</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategia de automatización</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Optimización del recorrido del cliente</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Consultoría para escalar</span>
           </div>
-          <p class="gl-feature-desc">Sistemas de puntos, beneficios y comunicación personalizada que mantienen a tus clientes comprometidos con tu marca.</p>
         </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-            <span class="gl-feature-title">Campañas de reactivación</span>
+        <div>
+          <div class="gl-subcat-label">Marketing</div>
+          <div class="gl-tags-list">
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de Influencer Marketing</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategias de contenido viral</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas en redes sociales</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Publicación automática en redes</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Email Marketing</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>WhatsApp Marketing</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de reactivación</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de recompra</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Cross Selling</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Up Selling</span>
           </div>
-          <p class="gl-feature-desc">Identificamos clientes inactivos y lanzamos secuencias automáticas para recuperarlos antes de que se vayan con la competencia.</p>
         </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.86 9.86 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-            <span class="gl-feature-title">Atención post-venta con IA</span>
+        <div>
+          <div class="gl-subcat-label">Fidelización</div>
+          <div class="gl-tags-list">
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Programas de fidelización</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Sistemas de puntos</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Membresías</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Seguimiento postventa</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Solicitud automática de reseñas</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Encuestas de satisfacción</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Recuperación de clientes inactivos</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Recordatorios de renovación</span>
+            <span class="gl-tag green"><span class="gl-tag-dot"></span>Automatización de comunicación</span>
           </div>
-          <p class="gl-feature-desc">Seguimiento automático después de cada compra para resolver dudas, recolectar reseñas y generar nuevas oportunidades de venta.</p>
-        </div>
-        <div class="gl-feature-item">
-          <div class="gl-feature-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
-            <span class="gl-feature-title">Análisis de comportamiento del cliente</span>
-          </div>
-          <p class="gl-feature-desc">Entendemos cuándo y por qué compran tus clientes para anticipar su próxima necesidad y ofrecerle lo correcto en el momento perfecto.</p>
         </div>
       </div>
 
-      <p class="gl-service-cta">
-        La recompra es el canal de ventas más rentable que existe. Construye relaciones duraderas con tus clientes y multiplica su valor de por vida para tu negocio.
-      </p>
+      <div class="gl-service-cta-box">
+        <p><strong>El resultado:</strong> más clientes cualificados entrando al sistema, más ventas cerrándose de forma automática y más clientes existentes comprando de nuevo. Un negocio que crece sin depender de esfuerzo manual.</p>
+      </div>
 
       <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
         Solicitar Diagnóstico <span class="dot"></span>
+      </a>
+    </section>
+
+    <!-- ── SOLUCIONES A MEDIDA ── -->
+    <section class="gl-custom-section" id="medida" data-anim="up">
+
+      <div class="gl-service-icon">
+        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 46 L10 28 L20 18 L30 24 L46 10" stroke="rgba(251,191,36,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="8" y="8" width="12" height="12" rx="3" stroke="rgba(251,191,36,0.4)" stroke-width="1.2" fill="rgba(251,191,36,0.1)"/>
+          <rect x="36" y="36" width="12" height="12" rx="3" stroke="rgba(251,191,36,0.4)" stroke-width="1.2" fill="rgba(251,191,36,0.1)"/>
+          <circle cx="30" cy="24" r="4" fill="rgba(251,191,36,0.7)"/>
+        </svg>
+      </div>
+
+      <p class="gl-service-num">Servicio 04</p>
+      <h2 class="gl-service-title"><span class="gl-gradient-amber">Soluciones</span> a Medida</h2>
+      <p class="gl-service-subtitle">Cuando tu negocio necesita algo que no existe, lo construimos.</p>
+
+      <p class="gl-service-desc">
+        Desarrollamos software empresarial personalizado para empresas que requieren herramientas específicas. Si un proceso de tu negocio no encaja en ninguna solución estándar del mercado, creamos la herramienta exacta que necesitas.
+      </p>
+
+      <div class="gl-service-visual amber-visual">
+        <div class="gl-service-visual-inner">
+          <div class="big-num">04</div>
+          <div class="gl-visual-label">Software · Plataformas · Agentes IA · Integraciones</div>
+        </div>
+      </div>
+
+      <div class="gl-tags-wrap">
+        <div class="gl-tags-list">
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Aplicaciones web</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Plataformas internas</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Portales de clientes</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Dashboards personalizados</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Sistemas de gestión</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Herramientas comerciales</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Agentes de IA</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Bases de conocimiento inteligentes</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Integraciones mediante API</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Automatizaciones completamente personalizadas</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Herramientas internas</span>
+          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Software empresarial a medida</span>
+        </div>
+      </div>
+
+      <div class="gl-service-cta-box">
+        <p><strong>El resultado:</strong> una herramienta construida exactamente para cómo funciona tu empresa — no adaptada, sino diseñada desde cero para encajar en tus procesos y escalar con tu negocio.</p>
+      </div>
+
+      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
+        Hablar de tu proyecto <span class="dot"></span>
       </a>
     </section>
 
   </div><!-- /gl-services-content -->
 </div><!-- /gl-services-wrapper -->
 
-<!-- TICKER 2 -->
+<!-- TICKER -->
 <div data-ticker style="padding:0.8rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,0.2);"></div>
 
 <!-- FOOTER -->
 <footer class="gl-footer">
   <div class="gl-footer-inner" data-anim="up">
-    <h2>¿Listo para descubrir qué está <span class="gl-gradient">frenando tu negocio?</span></h2>
-    <p>Analizamos tus procesos, identificamos dónde estás perdiendo clientes, tiempo o dinero y diseñamos un sistema con inteligencia artificial para solucionarlo.</p>
-    <p>Solicita un diagnóstico estratégico y descubre cómo hacer que tu negocio venda más y funcione mejor.</p>
+    <h2>¿Listo para construir el sistema que <span class="gl-gradient">tu empresa necesita?</span></h2>
+    <p>Analizamos tu operación, identificamos los cuellos de botella y diseñamos la arquitectura exacta de automatización e IA para que tu negocio escale sin depender de más personas ni más horas.</p>
+    <p>Un diagnóstico estratégico, sin compromiso.</p>
     <div class="gl-footer-buttons">
       <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
         SOLICITAR DIAGNÓSTICO <span class="dot"></span>
@@ -898,14 +871,12 @@ html, body {
   </div>
 </footer>
 
-<!-- Webflow JS for lottie animations -->
 <script src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/js/adsorb.b8fc4c0df.js" crossorigin="anonymous"></script>
 <script src="/js/animations.js"></script>
 
-<!-- Sidebar active state on scroll -->
 <script>
 (function() {
-  const sections = ['captacion', 'ventas', 'fidelizacion'];
+  const sections = ['comercial', 'automatizacion', 'crecimiento', 'medida'];
   const items = document.querySelectorAll('.gl-sidebar-item');
 
   function updateActive() {
@@ -927,4 +898,3 @@ html, body {
 
 </body>
 </html>
-
