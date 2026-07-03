@@ -14,6 +14,27 @@
   /* Prevent horizontal overflow only (don't restrict vertical/touch) */
   body { overflow-x: hidden; }
   .main-wrapper, .page-wrapper { overflow-x: hidden; }
+
+  /* ── Ocultar botón CTA en todas las navs en móvil ── */
+  /* Webflow nav */
+  .nav_container .button,
+  .nav_container a.button,
+  .nav_menu > a.button,
+  .nav_menu > .button { display: none !important; }
+
+  /* GL-nav (todas las páginas custom) */
+  .gl-nav .gl-btn,
+  .gl-nav .gl-btn-nav,
+  .gl-nav > .gl-btn,
+  .gl-nav > .gl-btn-nav,
+  .gl-nav-links > .gl-btn,
+  .gl-nav-links > a.gl-btn,
+  .gl-nav-links > a.gl-btn-nav { display: none !important; }
+
+  /* Mostrar hamburguesa en todas las gl-nav */
+  .gl-hamburger { display: flex !important; }
+  /* Ocultar links de escritorio */
+  .gl-nav-links { display: none !important; }
 }
 
 /* ────────────────────────────────────────────────── */

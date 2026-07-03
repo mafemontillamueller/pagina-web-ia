@@ -2,925 +2,1204 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>GlowLabs - Sistema Operativo para tu Empresa</title>
+<title>GlowLabs · Servicios — Sistema Operativo para tu Empresa</title>
 <meta name="description" content="Instalamos el sistema operativo completo de tu empresa: captación, automatización, ventas, marketing y software a medida con Inteligencia Artificial."/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<link href="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/css/adsorb.webflow.shared.58204898c.css" rel="stylesheet" type="text/css"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/>
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-<script type="text/javascript">WebFont.load({google:{families:["Sora:100,200,300,regular,500,600,700,800:latin,latin-ext"]}});</script>
-<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64cf5d1c0aef8ef8c7af9673_fav.png" rel="shortcut icon" type="image/x-icon"/>
+<link rel="stylesheet" href="/css/animations.css"/>
 
 <style>
-/* ===== RESET & BASE ===== */
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #0a0a0c;
-  --text: #ffffff;
-  --text-muted: rgba(255,255,255,0.6);
-  --purple: #7c3aed;
-  --blue: #1a56db;
-  --green: #059669;
-  --sidebar-w: 220px;
-}
-
-html, body {
-  background: var(--bg);
-  color: var(--text);
+html { scroll-behavior: smooth; }
+body {
+  background: #08080c;
+  color: #fff;
   font-family: 'Sora', sans-serif;
   -webkit-font-smoothing: antialiased;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
-
 #shader-background { display: none !important; }
 
-/* ===== NAV ===== */
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
 .gl-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
   padding: 1.2rem 2.5rem;
-  background: rgba(10,10,12,0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(8,8,12,0.85);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s;
 }
 .gl-logo {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -0.03em;
-  text-decoration: none;
+  font-size: 1.5rem; font-weight: 800; color: #fff;
+  letter-spacing: -0.03em; text-decoration: none;
 }
-.gl-nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
+.gl-nav-links { display: flex; align-items: center; gap: 2rem; }
 .gl-nav-links a {
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color 0.2s;
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  font-size: 0.88rem; font-weight: 500; transition: color 0.2s;
 }
-.gl-nav-links a:hover { color: #fff; }
-.gl-nav-links a.active { color: #fff; }
+.gl-nav-links a:hover, .gl-nav-links a.active { color: #fff; }
 .gl-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.4rem;
-  border: 1.5px solid rgba(255,255,255,0.5);
-  border-radius: 9999px;
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s, border-color 0.2s;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.6rem 1.3rem; border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 9999px; color: #fff; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s; white-space: nowrap;
+  font-family: 'Sora', sans-serif;
 }
 .gl-btn:hover { background: rgba(255,255,255,0.08); border-color: #fff; }
-.gl-btn .dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
+.gl-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+/* Hamburger */
+.gl-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.gl-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: rgba(255,255,255,0.8); border-radius: 2px;
+  transition: all 0.3s;
+}
+.gl-mobile-menu {
+  display: none; position: fixed; top: 58px; left: 0; right: 0;
+  background: rgba(8,8,12,0.98); backdrop-filter: blur(20px);
+  padding: 1rem 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 9998; flex-direction: column;
+}
+.gl-mobile-menu.open { display: flex; }
+.gl-mobile-menu a {
+  color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1.05rem;
+  padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  font-family: 'Sora', sans-serif; font-weight: 500;
+}
+.gl-mobile-menu a:last-child { border-bottom: none; }
+.gl-mobile-menu a.mm-active { color: #fff; font-weight: 600; }
+@media (max-width: 768px) {
+  .gl-hamburger { display: flex; }
+  .gl-nav-links { display: none; }
+}
+@media (max-width: 991px) {
+  .gl-nav .gl-btn { display: none; }
 }
 
-/* ===== HERO ===== */
-.gl-hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
+/* ═══════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════ */
+#sv-progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+  background: linear-gradient(90deg, #7c3aed, #3b82f6, #059669, #f59e0b);
+  width: 0%; transition: width 0.1s linear;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.sv-hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 10rem 2.5rem 6rem;
   overflow: hidden;
-  padding: 8rem 2.5rem 4rem;
 }
-.gl-hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 620px;
-}
-.gl-hero-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 1.5rem;
-}
-.gl-hero h1 {
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-}
-.gl-gradient {
-  background: linear-gradient(135deg, #f97316 0%, #a855f7 50%, #6366f1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gl-gradient-purple {
-  background: linear-gradient(135deg, #e879f9 0%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gl-gradient-blue {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gl-gradient-green {
-  background: linear-gradient(135deg, #34d399 0%, #059669 50%, #047857 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gl-gradient-amber {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.gl-hero p {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  margin-bottom: 2.5rem;
-}
-.gl-hero-stats {
-  display: flex;
-  gap: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-.gl-hero-stat strong {
-  display: block;
-  font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: 0.2rem;
-}
-.gl-hero-stat span {
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.45);
-  font-weight: 500;
-}
-.gl-hero-dots {
-  position: absolute;
-  right: 0; top: 0;
-  width: 55%;
-  height: 100%;
-  pointer-events: none;
-}
-.gl-hero-lottie { width: 100%; height: 100%; }
-.gl-hero-bg-glow {
-  position: absolute;
-  inset: 0;
+.sv-hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(244,63,94,0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(124,58,237,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 80% 60%, rgba(59,130,246,0.08) 0%, transparent 60%);
 }
-.gl-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(10,10,12,0.75) 0%, transparent 25%, transparent 75%, #0a0a0c 100%);
-  pointer-events: none;
-  z-index: 1;
+/* Animated noise grain */
+.sv-hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5; pointer-events: none;
 }
-.scroll-down-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  z-index: 2;
+.sv-hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center; max-width: 1200px; margin: 0 auto;
+  width: 100%; position: relative; z-index: 2;
 }
-.scroll-dots { display: flex; flex-direction: column; gap: 3px; align-items: center; }
-.scroll-dots span {
-  display: block; width: 4px; height: 4px;
-  border-radius: 50%; background: var(--text-muted);
-  animation: scrollPulse 1.5s ease-in-out infinite;
-}
-.scroll-dots span:nth-child(2) { animation-delay: 0.2s; }
-.scroll-dots span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-
-/* Floating shapes */
-@keyframes shapeEntry1 { from{opacity:0;transform:translateY(-150px) rotate(-3deg)} to{opacity:1;transform:translateY(0) rotate(12deg)} }
-@keyframes shapeEntry2 { from{opacity:0;transform:translateY(-150px) rotate(-30deg)} to{opacity:1;transform:translateY(0) rotate(-15deg)} }
-@keyframes shapeEntry3 { from{opacity:0;transform:translateY(-150px) rotate(-23deg)} to{opacity:1;transform:translateY(0) rotate(-8deg)} }
-@keyframes shapeFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(15px)} }
-.gl-shape-wrap { position:absolute;animation-fill-mode:both;animation-timing-function:cubic-bezier(0.23,0.86,0.39,0.96);animation-duration:2.4s;pointer-events:none; }
-.gl-shape-float { animation:shapeFloat 12s ease-in-out infinite; }
-.gl-shape-pill { border-radius:9999px;background:linear-gradient(to right,var(--shape-color,rgba(255,255,255,0.08)),transparent);backdrop-filter:blur(2px);border:2px solid rgba(255,255,255,0.15);box-shadow:0 8px 32px 0 rgba(255,255,255,0.1); }
-
-/* ===== SERVICES WRAPPER ===== */
-.gl-services-wrapper {
-  position: relative;
-  display: flex;
-  background: var(--bg);
-}
-.gl-sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: var(--sidebar-w);
-  flex-shrink: 0;
-  display: flex;
-  align-items: flex-start;
-  padding-top: 40vh;
-  padding-left: 2.5rem;
-}
-.gl-sidebar-inner { position: relative; display: flex; flex-direction: column; gap: 0; }
-.gl-sidebar-line { position:absolute;left:6px;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.15); }
-.gl-sidebar-item {
-  display: flex; align-items: center; gap: 1rem;
-  padding: 1rem 0; cursor: pointer; text-decoration: none;
-}
-.gl-sidebar-dot {
-  width: 13px; height: 13px; border-radius: 50%;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  background: var(--bg); flex-shrink: 0; z-index: 1;
-  transition: background 0.3s, border-color 0.3s;
-}
-.gl-sidebar-item.active .gl-sidebar-dot,
-.gl-sidebar-item:hover .gl-sidebar-dot { background: #fff; border-color: #fff; }
-.gl-sidebar-label {
-  font-size: 0.75rem; font-weight: 500;
-  color: rgba(255,255,255,0.4); letter-spacing: 0.02em;
-  transition: color 0.3s; white-space: nowrap;
-}
-.gl-sidebar-item.active .gl-sidebar-label,
-.gl-sidebar-item:hover .gl-sidebar-label { color: rgba(255,255,255,0.9); }
-
-/* ===== SERVICE SECTIONS ===== */
-.gl-services-content { flex: 1; min-width: 0; }
-
-.gl-service-section {
-  padding: 7rem 4rem 7rem 2rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  text-align: center;
-}
-
-.gl-service-icon {
-  width: 56px; height: 56px;
-  margin: 0 auto 2rem;
-  display: flex; align-items: center; justify-content: center;
-}
-.gl-service-icon svg { width: 100%; height: 100%; }
-
-.gl-service-num {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 1rem;
-}
-
-.gl-service-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-bottom: 0.8rem;
-}
-
-.gl-service-subtitle {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.5);
-  font-weight: 400;
+.sv-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
   margin-bottom: 1.5rem;
-  font-style: italic;
 }
+.sv-hero-eyebrow::before {
+  content: ''; display: block; width: 20px; height: 1px;
+  background: rgba(255,255,255,0.25);
+}
+.sv-hero h1 {
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 800; line-height: 1.02;
+  letter-spacing: -0.04em; margin-bottom: 1.5rem;
+}
+.sv-hero-desc {
+  font-size: 1rem; color: rgba(255,255,255,0.55);
+  line-height: 1.75; margin-bottom: 2.5rem; max-width: 480px;
+}
+.sv-hero-cta-row {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.sv-hero-link {
+  font-size: 0.85rem; color: rgba(255,255,255,0.5);
+  text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2);
+  transition: color 0.2s, border-color 0.2s;
+}
+.sv-hero-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
 
-.gl-service-desc {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.75;
-  max-width: 660px;
-  margin: 0 auto 3rem;
+/* Hero right: stats board */
+.sv-hero-board {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; padding: 2rem;
+  display: flex; flex-direction: column; gap: 0;
 }
-
-/* Visual panel */
-.gl-service-visual {
-  width: 100%; height: 220px;
-  border-radius: 1rem; margin-bottom: 3.5rem;
-  overflow: hidden; display: flex;
-  align-items: center; justify-content: center;
-  position: relative;
-}
-.gl-service-visual.purple-visual { background: linear-gradient(135deg, #3b0764 0%, #7c3aed 50%, #a78bfa 100%); }
-.gl-service-visual.blue-visual   { background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #60a5fa 100%); }
-.gl-service-visual.green-visual  { background: linear-gradient(135deg, #064e3b 0%, #059669 50%, #6ee7b7 100%); }
-.gl-service-visual.amber-visual  { background: linear-gradient(135deg, #78350f 0%, #d97706 50%, #fbbf24 100%); }
-.gl-service-visual-inner { text-align: center; }
-.gl-service-visual-inner .big-num {
-  font-size: 6rem; font-weight: 800;
-  letter-spacing: -0.05em; line-height: 1;
-  color: rgba(255,255,255,0.12);
-}
-.gl-visual-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-top: 0.5rem;
-}
-
-/* ===== TAGS LIST ===== */
-.gl-tags-wrap {
-  max-width: 760px;
-  margin: 0 auto 2.5rem;
-}
-.gl-tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-}
-.gl-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.9rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.75);
-  transition: border-color 0.2s, background 0.2s;
-  white-space: nowrap;
-}
-.gl-tag:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.07); }
-.gl-tag-dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.5;
-  flex-shrink: 0;
-}
-.gl-tag.purple { border-color: rgba(168,85,247,0.25); color: #c084fc; background: rgba(168,85,247,0.06); }
-.gl-tag.blue   { border-color: rgba(96,165,250,0.25); color: #93c5fd; background: rgba(96,165,250,0.06); }
-.gl-tag.green  { border-color: rgba(52,211,153,0.25); color: #6ee7b7; background: rgba(52,211,153,0.06); }
-.gl-tag.amber  { border-color: rgba(251,191,36,0.25); color: #fcd34d; background: rgba(251,191,36,0.06); }
-
-/* Sub-categories inside service 3 */
-.gl-subcategories {
-  max-width: 760px;
-  margin: 0 auto 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  text-align: left;
-}
-.gl-subcat-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  margin-bottom: 0.8rem;
-  padding-bottom: 0.6rem;
+.sv-stat-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+.sv-stat-row:last-child { border-bottom: none; }
+.sv-stat-label {
+  font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 500;
+  display: flex; align-items: center; gap: 0.7rem;
+}
+.sv-stat-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+}
+.sv-stat-value {
+  font-size: 1.5rem; font-weight: 800; letter-spacing: -0.04em;
+}
+.sv-services-map {
+  display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem;
+  padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sv-map-item {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.8rem; padding: 0.5rem 0.9rem;
+  border-radius: 8px; text-decoration: none;
+  transition: background 0.2s; cursor: pointer;
+}
+.sv-map-item:hover { background: rgba(255,255,255,0.04); }
+.sv-map-item-num { font-size: 0.68rem; color: rgba(255,255,255,0.25); font-weight: 600; }
+.sv-map-item-name { color: rgba(255,255,255,0.7); font-weight: 500; }
+.sv-map-item-arrow { color: rgba(255,255,255,0.2); font-size: 0.8rem; }
 
-/* CTA block */
-.gl-service-cta-box {
-  max-width: 660px;
-  margin: 0 auto 2.5rem;
-  padding: 1.5rem 2rem;
-  background: rgba(255,255,255,0.025);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 14px;
-  text-align: left;
-}
-.gl-service-cta-box p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-.gl-service-cta-box strong {
-  color: rgba(255,255,255,0.85);
-  font-weight: 600;
-}
+/* Gradient words */
+.g-purple { background: linear-gradient(135deg, #e879f9 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.g-blue   { background: linear-gradient(135deg, #93c5fd 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.g-green  { background: linear-gradient(135deg, #6ee7b7 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.g-amber  { background: linear-gradient(135deg, #fcd34d 0%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.g-main   { background: linear-gradient(135deg, #f97316 0%, #a855f7 50%, #6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-/* ===== SOLUCIONES A MEDIDA ===== */
-.gl-custom-section {
-  padding: 6rem 4rem 6rem 2rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
-  text-align: center;
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
 }
+[data-reveal="blur"] {
+  opacity: 0; transform: translateY(20px);
+  filter: blur(8px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.9s;
+}
+[data-reveal="left"] {
+  opacity: 0; transform: translateX(-50px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+[data-reveal="right"] {
+  opacity: 0; transform: translateX(50px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+[data-reveal="scale"] {
+  opacity: 0; transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.revealed[data-reveal] {
+  opacity: 1 !important; transform: none !important; filter: none !important;
+}
+[data-delay="1"] { transition-delay: 0.1s !important; }
+[data-delay="2"] { transition-delay: 0.2s !important; }
+[data-delay="3"] { transition-delay: 0.3s !important; }
+[data-delay="4"] { transition-delay: 0.4s !important; }
+[data-delay="5"] { transition-delay: 0.5s !important; }
+[data-delay="6"] { transition-delay: 0.6s !important; }
+[data-delay="7"] { transition-delay: 0.7s !important; }
+[data-delay="8"] { transition-delay: 0.8s !important; }
 
-/* ===== FOOTER ===== */
-.gl-footer {
-  background: #0c0d0f;
-  padding: 5rem 2.5rem;
+/* ═══════════════════════════════════════
+   SERVICE SECTIONS
+═══════════════════════════════════════ */
+.sv-section {
+  position: relative; overflow: hidden;
+  padding: 10rem 0 8rem;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
-.gl-footer-inner {
-  max-width: 760px; margin: 0 auto;
-  text-align: center; display: flex;
-  flex-direction: column; align-items: center;
+
+/* Big background number */
+.sv-bg-num {
+  position: absolute;
+  top: 50%; right: -0.05em;
+  transform: translateY(-50%);
+  font-size: clamp(18rem, 25vw, 28rem);
+  font-weight: 800; letter-spacing: -0.05em;
+  line-height: 1; pointer-events: none;
+  opacity: 0.028; color: #fff;
+  user-select: none;
+  transition: opacity 1.2s;
 }
-.gl-footer h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  font-weight: 700; line-height: 1.15;
-  letter-spacing: -0.03em; margin-bottom: 1.2rem;
+.sv-section:hover .sv-bg-num { opacity: 0.045; }
+
+/* Color glow per section */
+.sv-glow {
+  position: absolute; pointer-events: none;
+  border-radius: 50%; filter: blur(100px); opacity: 0;
+  transition: opacity 1.5s;
 }
-.gl-footer p {
-  font-size: 1rem; color: var(--text-muted);
-  line-height: 1.7; margin-bottom: 0.8rem; max-width: 580px;
+.sv-section.in-view .sv-glow { opacity: 1; }
+
+.sv-section.purple .sv-glow { background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%); width: 600px; height: 600px; top: -150px; left: -100px; }
+.sv-section.blue   .sv-glow { background: radial-gradient(circle, rgba(59,130,246,0.18), transparent 70%); width: 700px; height: 500px; top: -100px; right: -150px; }
+.sv-section.green  .sv-glow { background: radial-gradient(circle, rgba(5,150,105,0.15), transparent 70%); width: 600px; height: 600px; bottom: -100px; left: -100px; }
+.sv-section.amber  .sv-glow { background: radial-gradient(circle, rgba(245,158,11,0.15), transparent 70%); width: 700px; height: 500px; top: -150px; right: -150px; }
+
+/* Inner layout */
+.sv-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 2.5rem;
+  position: relative; z-index: 2;
 }
-.gl-footer-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-.gl-footer-bottom {
+
+/* Section header */
+.sv-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: start; margin-bottom: 5rem;
+}
+.sv-header-left { }
+.sv-num-label {
+  display: inline-flex; align-items: center; gap: 0.8rem;
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 1.5rem;
+}
+.sv-num-label::after {
+  content: ''; flex: 1; height: 1px; width: 40px;
+  background: rgba(255,255,255,0.15); display: block;
+}
+.sv-section-title {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 800; letter-spacing: -0.04em;
+  line-height: 1.03; margin-bottom: 1.2rem;
+}
+.sv-section-sub {
+  font-size: 0.95rem; color: rgba(255,255,255,0.45);
+  font-style: italic; line-height: 1.6;
+}
+.sv-header-right {
+  padding-top: 1rem;
+}
+.sv-section-desc {
+  font-size: 1rem; color: rgba(255,255,255,0.55);
+  line-height: 1.8; margin-bottom: 2rem;
+}
+.sv-result-box {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.2rem 1.4rem;
+  border-radius: 12px;
+  border-left: 2px solid;
+  background: rgba(255,255,255,0.02);
+}
+.sv-result-box.purple { border-color: rgba(124,58,237,0.5); }
+.sv-result-box.blue   { border-color: rgba(59,130,246,0.5); }
+.sv-result-box.green  { border-color: rgba(5,150,105,0.5); }
+.sv-result-box.amber  { border-color: rgba(245,158,11,0.5); }
+.sv-result-icon {
+  font-size: 1rem; flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.sv-result-box p {
+  font-size: 0.9rem; color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+}
+.sv-result-box strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+/* Tags grid */
+.sv-tags-section { }
+.sv-tags-header {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 1.2rem;
+}
+.sv-tags-group { margin-bottom: 2.5rem; }
+.sv-tags-group:last-child { margin-bottom: 0; }
+.sv-tags-group-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.22);
+  margin-bottom: 0.8rem; padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sv-tags {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+}
+.sv-tag {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.8rem; font-weight: 500;
+  border: 1px solid;
+  white-space: nowrap;
+  opacity: 0; transform: translateY(12px) scale(0.95);
+  transition: opacity 0.4s, transform 0.4s, background 0.2s;
+  cursor: default;
+}
+.sv-tag.revealed { opacity: 1; transform: none; }
+.sv-tag::before {
+  content: ''; width: 4px; height: 4px;
+  border-radius: 50%; background: currentColor; flex-shrink: 0;
+}
+.sv-tag:hover { transform: translateY(-2px); }
+
+.sv-tag.purple { color: #c084fc; border-color: rgba(192,132,252,0.2); background: rgba(124,58,237,0.06); }
+.sv-tag.purple:hover { background: rgba(124,58,237,0.12); border-color: rgba(192,132,252,0.35); }
+.sv-tag.blue   { color: #93c5fd; border-color: rgba(147,197,253,0.2); background: rgba(59,130,246,0.06); }
+.sv-tag.blue:hover { background: rgba(59,130,246,0.12); border-color: rgba(147,197,253,0.35); }
+.sv-tag.green  { color: #6ee7b7; border-color: rgba(110,231,183,0.2); background: rgba(5,150,105,0.06); }
+.sv-tag.green:hover { background: rgba(5,150,105,0.12); border-color: rgba(110,231,183,0.35); }
+.sv-tag.amber  { color: #fcd34d; border-color: rgba(252,211,77,0.2); background: rgba(245,158,11,0.06); }
+.sv-tag.amber:hover { background: rgba(245,158,11,0.12); border-color: rgba(252,211,77,0.35); }
+
+/* Section CTA */
+.sv-section-cta {
   display: flex; align-items: center; justify-content: space-between;
-  margin-top: 4rem; padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 2rem 2.5rem; margin-top: 4rem;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; gap: 2rem; flex-wrap: wrap;
+}
+.sv-section-cta p {
+  font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.6; flex: 1;
+}
+.sv-section-cta strong { color: rgba(255,255,255,0.9); }
+
+/* ═══════════════════════════════════════
+   FLOATING ANIMATED SHAPES PER SECTION
+═══════════════════════════════════════ */
+.sv-shape {
+  position: absolute; border-radius: 9999px; pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.06);
+  animation: svFloat linear infinite;
+}
+@keyframes svFloat {
+  0%   { transform: var(--sv-transform-a, translate(0,0) rotate(0deg)); }
+  50%  { transform: var(--sv-transform-b, translate(20px,15px) rotate(5deg)); }
+  100% { transform: var(--sv-transform-a, translate(0,0) rotate(0deg)); }
+}
+
+/* ═══════════════════════════════════════
+   TICKER / MARQUEE
+═══════════════════════════════════════ */
+.sv-ticker-wrap {
+  overflow: hidden; padding: 0.9rem 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.2);
+}
+.sv-ticker-track {
+  display: flex; gap: 3rem; width: max-content;
+  animation: svTicker 30s linear infinite;
+}
+.sv-ticker-wrap:hover .sv-ticker-track { animation-play-state: paused; }
+@keyframes svTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.sv-ticker-item {
+  display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0;
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.3); text-transform: uppercase; white-space: nowrap;
+}
+.sv-ticker-item .t-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.2);
+}
+
+/* ═══════════════════════════════════════
+   SIDEBAR SCROLL SPY
+═══════════════════════════════════════ */
+.sv-spy {
+  position: fixed; left: 1.5rem; top: 50%; transform: translateY(-50%);
+  z-index: 100; display: flex; flex-direction: column; gap: 0;
+}
+.sv-spy-line {
+  position: absolute; left: 5px; top: 0; bottom: 0;
+  width: 1px; background: rgba(255,255,255,0.1);
+}
+.sv-spy-item {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.6rem 0; text-decoration: none; position: relative;
+}
+.sv-spy-dot {
+  width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,0.2); background: #08080c;
+  z-index: 1; transition: all 0.3s;
+}
+.sv-spy-label {
+  font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.0);
+  white-space: nowrap; transition: all 0.3s;
+  transform: translateX(-4px);
+}
+.sv-spy-item:hover .sv-spy-label { color: rgba(255,255,255,0.5); transform: none; }
+.sv-spy-item.active .sv-spy-dot { border-color: #fff; background: #fff; box-shadow: 0 0 12px rgba(255,255,255,0.4); }
+.sv-spy-item.active .sv-spy-label { color: rgba(255,255,255,0.7); transform: none; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+.sv-footer {
+  padding: 7rem 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  text-align: center; background: #0a0a0e;
+}
+.sv-footer-inner { max-width: 680px; margin: 0 auto; }
+.sv-footer-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 1.5rem;
+}
+.sv-footer h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1.2rem;
+}
+.sv-footer p {
+  font-size: 1rem; color: rgba(255,255,255,0.45);
+  line-height: 1.75; margin-bottom: 2.5rem;
+}
+.sv-footer-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.gl-btn-solid {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem; border-radius: 9999px;
+  background: #fff; color: #08080c; font-size: 0.85rem; font-weight: 700;
+  letter-spacing: 0.05em; text-decoration: none; transition: opacity 0.2s;
+  font-family: 'Sora', sans-serif;
+}
+.gl-btn-solid:hover { opacity: 0.88; }
+.sv-footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 5rem; padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
   flex-wrap: wrap; gap: 1rem;
 }
-.gl-footer-logo {
-  font-size: 1.6rem; font-weight: 800;
-  color: #fff; letter-spacing: -0.03em; text-decoration: none;
+.sv-footer-logo {
+  font-size: 1.5rem; font-weight: 800; color: #fff;
+  letter-spacing: -0.03em; text-decoration: none;
 }
-.gl-copyright { font-size: 0.8rem; color: var(--text-muted); }
+.sv-footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+.sv-footer-nav { display: flex; gap: 1.5rem; }
+.sv-footer-nav a {
+  font-size: 0.78rem; color: rgba(255,255,255,0.3);
+  text-decoration: none; transition: color 0.2s;
+}
+.sv-footer-nav a:hover { color: rgba(255,255,255,0.7); }
 
-/* ===== RESPONSIVE ===== */
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .sv-spy { display: none; }
+  .sv-bg-num { font-size: 16rem; }
+}
 @media (max-width: 900px) {
-  .gl-sidebar { display: none; }
-  .gl-service-section { padding: 5rem 1.5rem; }
-  .gl-custom-section { padding: 4rem 1.5rem; }
-  .gl-hero { padding: 7rem 1.5rem 4rem; }
-  .gl-hero-dots { width: 100%; opacity: 0.3; }
-  .gl-nav { padding: 1rem 1.5rem; }
-  .gl-hero-stats { gap: 1.5rem; }
+  .sv-header { grid-template-columns: 1fr; gap: 2rem; }
+  .sv-hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .sv-hero-board { display: none; }
 }
 @media (max-width: 600px) {
-  .gl-nav-links a:not(.gl-btn) { display: none; }
-  .gl-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
-  .gl-service-section { padding: 3rem 1.2rem; }
-  .gl-custom-section { padding: 3rem 1.2rem; }
-  .gl-hero-stats { flex-direction: column; gap: 1rem; }
-  .gl-service-cta-box { padding: 1.2rem; }
+  .sv-hero { padding: 8rem 1.5rem 5rem; }
+  .sv-inner { padding: 0 1.2rem; }
+  .sv-section { padding: 6rem 0 5rem; }
+  .sv-section-cta { padding: 1.5rem; }
+  .sv-bg-num { font-size: 10rem; opacity: 0.02; }
+  .sv-hero h1 { font-size: 2.4rem; }
+  .sv-footer { padding: 5rem 1.5rem; }
+  .sv-footer-bottom { flex-direction: column; text-align: center; }
 }
+
+/* WA Float */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+  display: flex; align-items: center; gap: 0.65rem;
+  background: #25d366; color: #fff; border-radius: 9999px;
+  padding: 0.85rem 1.3rem; text-decoration: none;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
+  font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.08); }
+}
+@media (max-width: 600px) { .wa-float span { display: none; } }
 </style>
-<link rel="stylesheet" href="/css/animations.css"/>
 </head>
 
 <body>
 
-<!-- NAV -->
+<div id="sv-progress-bar"></div>
+
+<!-- ── NAV ── -->
 <nav class="gl-nav">
   <a href="/" class="gl-logo">Glowlabs</a>
   <div class="gl-nav-links">
     <a href="/services" class="active">Services</a>
     <a href="/about">About</a>
     <a href="/casos">Casos de Éxito</a>
+    <a href="/recursos">Recursos</a>
     <a href="/calculadora" style="color:#a78bfa;font-weight:600;">Calculadora ROI ↗</a>
     <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
       Solicitar Diagnóstico <span class="dot"></span>
     </a>
   </div>
+  <button class="gl-hamburger" aria-label="Abrir menú" onclick="document.getElementById('glMobileMenu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="glMobileMenu" class="gl-mobile-menu">
+  <a href="/services" class="mm-active">Services</a>
+  <a href="/about">About</a>
+  <a href="/casos">Casos de Éxito</a>
+  <a href="/recursos">Recursos</a>
+  <a href="/calculadora" style="color:#a78bfa;font-weight:700;">Calculadora ROI ↗</a>
+  <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" style="color:#6366f1;font-weight:700;">Solicitar Diagnóstico →</a>
+</div>
+
+<!-- ── SIDEBAR SCROLL SPY ── -->
+<nav class="sv-spy" aria-label="Secciones">
+  <div class="sv-spy-line"></div>
+  <a href="#comercial" class="sv-spy-item active" data-spy="comercial">
+    <span class="sv-spy-dot"></span>
+    <span class="sv-spy-label">Sistema Comercial</span>
+  </a>
+  <a href="#automatizacion" class="sv-spy-item" data-spy="automatizacion">
+    <span class="sv-spy-dot"></span>
+    <span class="sv-spy-label">Automatización</span>
+  </a>
+  <a href="#crecimiento" class="sv-spy-item" data-spy="crecimiento">
+    <span class="sv-spy-dot"></span>
+    <span class="sv-spy-label">Crecimiento</span>
+  </a>
+  <a href="#medida" class="sv-spy-item" data-spy="medida">
+    <span class="sv-spy-dot"></span>
+    <span class="sv-spy-label">A Medida</span>
+  </a>
 </nav>
 
-<!-- HERO -->
-<section class="gl-hero">
-  <div class="gl-hero-bg-glow"></div>
+<!-- ═══════════════════════
+     HERO
+═══════════════════════════ -->
+<section class="sv-hero">
+  <div class="sv-hero-bg"></div>
 
-  <div class="gl-shape-wrap" style="left:-5%;top:20%;animation-name:shapeEntry1;animation-delay:0.3s">
-    <div class="gl-shape-float"><div class="gl-shape-pill" style="width:600px;height:140px;--shape-color:rgba(99,102,241,0.15)"></div></div>
-  </div>
-  <div class="gl-shape-wrap" style="right:0%;top:70%;animation-name:shapeEntry2;animation-delay:0.5s">
-    <div class="gl-shape-float" style="animation-delay:2s"><div class="gl-shape-pill" style="width:500px;height:120px;--shape-color:rgba(168,85,247,0.15)"></div></div>
-  </div>
-  <div class="gl-shape-wrap" style="left:10%;bottom:10%;animation-name:shapeEntry3;animation-delay:0.4s">
-    <div class="gl-shape-float" style="animation-delay:1s"><div class="gl-shape-pill" style="width:300px;height:80px;--shape-color:rgba(139,92,246,0.15)"></div></div>
-  </div>
+  <!-- Floating shapes hero -->
+  <div class="sv-shape" style="width:500px;height:120px;top:15%;left:-8%;opacity:0.4;--sv-transform-a:translate(0,0) rotate(8deg);--sv-transform-b:translate(30px,20px) rotate(12deg);animation-duration:18s;"></div>
+  <div class="sv-shape" style="width:350px;height:90px;bottom:20%;right:-5%;opacity:0.3;--sv-transform-a:translate(0,0) rotate(-12deg);--sv-transform-b:translate(-20px,15px) rotate(-8deg);animation-duration:22s;"></div>
+  <div class="sv-shape" style="width:200px;height:60px;top:60%;left:30%;opacity:0.2;--sv-transform-a:translate(0,0) rotate(20deg);--sv-transform-b:translate(10px,-15px) rotate(25deg);animation-duration:14s;"></div>
 
-  <div class="gl-hero-overlay"></div>
-
-  <div class="gl-hero-dots">
-    <div class="gl-hero-lottie"
-      data-animation-type="lottie"
-      data-src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/64f885c762524263f8706468_adsorb_graphic_element_safari.json"
-      data-loop="1" data-direction="1" data-autoplay="1"
-      data-is-ix2-target="0" data-renderer="svg"
-      data-duration="0" data-loading="eager">
-    </div>
-  </div>
-
-  <div class="gl-hero-content" data-anim="blur">
-    <p class="gl-hero-eyebrow">Lo que hacemos</p>
-    <h1>Instalamos el <span class="gl-gradient">sistema operativo</span> de tu empresa.</h1>
-    <p>Automatizamos toda la operación comercial de tu negocio con Inteligencia Artificial. Desde el primer contacto con un cliente hasta que vuelve a comprar — todo conectado, todo funcionando solo.</p>
-    <div class="gl-hero-stats">
-      <div class="gl-hero-stat">
-        <strong class="gl-gradient">4</strong>
-        <span>bloques de servicio</span>
-      </div>
-      <div class="gl-hero-stat">
-        <strong class="gl-gradient">100+</strong>
-        <span>automatizaciones posibles</span>
-      </div>
-      <div class="gl-hero-stat">
-        <strong class="gl-gradient">24/7</strong>
-        <span>operación autónoma</span>
+  <div class="sv-hero-grid">
+    <div>
+      <p class="sv-hero-eyebrow" data-reveal data-delay="1">Lo que instalamos en tu empresa</p>
+      <h1 data-reveal data-delay="2">
+        El <span class="g-main">sistema operativo</span><br/>de tu empresa.
+      </h1>
+      <p class="sv-hero-desc" data-reveal data-delay="3">
+        Automatizamos toda la operación comercial con Inteligencia Artificial. Captación, ventas, fidelización y software — todo conectado y funcionando solo, 24/7.
+      </p>
+      <div class="sv-hero-cta-row" data-reveal data-delay="4">
+        <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn-solid">
+          Solicitar Diagnóstico →
+        </a>
+        <a href="/calculadora" class="sv-hero-link">Calcular mi ROI ↗</a>
       </div>
     </div>
-    <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
-      Solicitar Diagnóstico <span class="dot"></span>
-    </a>
-  </div>
-
-  <div class="scroll-down-hint">
-    <div class="scroll-dots"><span></span><span></span><span></span></div>
-    Scroll down
+    <div data-reveal="right" data-delay="3">
+      <div class="sv-hero-board">
+        <div class="sv-stat-row">
+          <span class="sv-stat-label">
+            <span class="sv-stat-dot" style="background:#a78bfa;box-shadow:0 0 6px #a78bfa;"></span>
+            Bloques de servicio
+          </span>
+          <span class="sv-stat-value g-purple" data-counter="4">0</span>
+        </div>
+        <div class="sv-stat-row">
+          <span class="sv-stat-label">
+            <span class="sv-stat-dot" style="background:#60a5fa;box-shadow:0 0 6px #60a5fa;"></span>
+            Automatizaciones posibles
+          </span>
+          <span class="sv-stat-value g-blue" data-counter="100">0</span>
+        </div>
+        <div class="sv-stat-row">
+          <span class="sv-stat-label">
+            <span class="sv-stat-dot" style="background:#34d399;box-shadow:0 0 6px #34d399;"></span>
+            Operación autónoma
+          </span>
+          <span class="sv-stat-value g-green">24/7</span>
+        </div>
+        <div class="sv-stat-row">
+          <span class="sv-stat-label">
+            <span class="sv-stat-dot" style="background:#fbbf24;box-shadow:0 0 6px #fbbf24;"></span>
+            Empresas transformadas
+          </span>
+          <span class="sv-stat-value g-amber" data-counter="30">0</span>
+        </div>
+        <div class="sv-services-map">
+          <a href="#comercial" class="sv-map-item">
+            <span class="sv-map-item-num">01</span>
+            <span class="sv-map-item-name">Sistema Comercial Inteligente</span>
+            <span class="sv-map-item-arrow">↓</span>
+          </a>
+          <a href="#automatizacion" class="sv-map-item">
+            <span class="sv-map-item-num">02</span>
+            <span class="sv-map-item-name">Automatización de Ventas</span>
+            <span class="sv-map-item-arrow">↓</span>
+          </a>
+          <a href="#crecimiento" class="sv-map-item">
+            <span class="sv-map-item-num">03</span>
+            <span class="sv-map-item-name">Crecimiento y Fidelización</span>
+            <span class="sv-map-item-arrow">↓</span>
+          </a>
+          <a href="#medida" class="sv-map-item">
+            <span class="sv-map-item-num">04</span>
+            <span class="sv-map-item-name">Soluciones a Medida</span>
+            <span class="sv-map-item-arrow">↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- TICKER -->
-<div data-ticker style="padding:0.8rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:0;background:rgba(0,0,0,0.2);"></div>
+<!-- ── TICKER ── -->
+<div class="sv-ticker-wrap" aria-hidden="true">
+  <div class="sv-ticker-track">
+    <span class="sv-ticker-item">Sistema Comercial<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Automatización de Ventas<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Captación con IA<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">CRM Inteligente<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Crecimiento & Fidelización<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Soluciones a Medida<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Asistente IA 24/7<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">WhatsApp Automático<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Email Marketing<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Pipeline Comercial<span class="t-dot"></span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="sv-ticker-item">Sistema Comercial<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Automatización de Ventas<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Captación con IA<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">CRM Inteligente<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Crecimiento & Fidelización<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Soluciones a Medida<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Asistente IA 24/7<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">WhatsApp Automático<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Email Marketing<span class="t-dot"></span></span>
+    <span class="sv-ticker-item">Pipeline Comercial<span class="t-dot"></span></span>
+  </div>
+</div>
 
-<!-- SERVICES -->
-<div class="gl-services-wrapper">
+<!-- ═══════════════════════
+     SERVICIO 01
+═══════════════════════════ -->
+<section class="sv-section purple" id="comercial">
+  <div class="sv-glow"></div>
+  <div class="sv-bg-num">01</div>
 
-  <!-- SIDEBAR -->
-  <aside class="gl-sidebar">
-    <div class="gl-sidebar-inner">
-      <div class="gl-sidebar-line"></div>
-      <a href="#comercial" class="gl-sidebar-item active" data-section="comercial">
-        <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Sistema Comercial</span>
-      </a>
-      <a href="#automatizacion" class="gl-sidebar-item" data-section="automatizacion">
-        <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Automatización</span>
-      </a>
-      <a href="#crecimiento" class="gl-sidebar-item" data-section="crecimiento">
-        <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">Crecimiento</span>
-      </a>
-      <a href="#medida" class="gl-sidebar-item" data-section="medida">
-        <span class="gl-sidebar-dot"></span>
-        <span class="gl-sidebar-label">A Medida</span>
+  <!-- Floating shapes -->
+  <div class="sv-shape" style="width:400px;height:100px;top:10%;right:5%;opacity:0.3;--sv-transform-a:translate(0,0) rotate(-8deg);--sv-transform-b:translate(-20px,20px) rotate(-4deg);animation-duration:20s;border-color:rgba(167,139,250,0.12);"></div>
+  <div class="sv-shape" style="width:250px;height:70px;bottom:15%;left:10%;opacity:0.25;--sv-transform-a:translate(0,0) rotate(15deg);--sv-transform-b:translate(15px,-10px) rotate(19deg);animation-duration:16s;border-color:rgba(167,139,250,0.1);"></div>
+
+  <div class="sv-inner">
+    <div class="sv-header">
+      <div class="sv-header-left">
+        <div class="sv-num-label" data-reveal data-delay="1">
+          <span>Servicio 01</span>
+        </div>
+        <h2 class="sv-section-title" data-reveal data-delay="2">
+          <span class="g-purple">Sistema Comercial</span><br/>Inteligente
+        </h2>
+        <p class="sv-section-sub" data-reveal data-delay="3">
+          Ningún lead se pierde.<br/>Toda la empresa trabaja sobre un solo sistema.
+        </p>
+      </div>
+      <div class="sv-header-right" data-reveal="right" data-delay="2">
+        <p class="sv-section-desc">
+          Construimos la infraestructura completa de captación y gestión de clientes. Asistentes con IA que atienden, califican y organizan cada oportunidad — automáticamente, en todos tus canales, las 24 horas.
+        </p>
+        <div class="sv-result-box purple">
+          <span class="sv-result-icon">✦</span>
+          <p><strong>El resultado:</strong> ningún lead se pierde, ninguna cita se olvida y toda tu empresa trabaja sobre un sistema organizado. Tu equipo deja de perseguir clientes — el sistema los atrae, los clasifica y los entrega listos para cerrar.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sv-tags-section" data-reveal data-delay="3">
+      <div class="sv-tags-header">Lo que instalamos</div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Captación & Atención</div>
+        <div class="sv-tags">
+          <span class="sv-tag purple">Asistente IA para WhatsApp</span>
+          <span class="sv-tag purple">Asistente IA para Instagram</span>
+          <span class="sv-tag purple">Chat web inteligente</span>
+          <span class="sv-tag purple">Bots de voz con IA</span>
+          <span class="sv-tag purple">Atención automática 24/7</span>
+          <span class="sv-tag purple">Respuestas automáticas</span>
+          <span class="sv-tag purple">Captura automática de leads</span>
+          <span class="sv-tag purple">Formularios inteligentes</span>
+          <span class="sv-tag purple">Landing Pages</span>
+          <span class="sv-tag purple">Páginas web dinámicas</span>
+        </div>
+      </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Agendamiento</div>
+        <div class="sv-tags">
+          <span class="sv-tag purple">Agendamiento automático</span>
+          <span class="sv-tag purple">Confirmación de citas</span>
+          <span class="sv-tag purple">Recordatorios de citas</span>
+          <span class="sv-tag purple">Reagendamiento automático</span>
+        </div>
+      </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">CRM & Organización</div>
+        <div class="sv-tags">
+          <span class="sv-tag purple">Calificación automática de leads</span>
+          <span class="sv-tag purple">Asignación al comercial adecuado</span>
+          <span class="sv-tag purple">CRM organizado</span>
+          <span class="sv-tag purple">Gestión completa de clientes</span>
+          <span class="sv-tag purple">Pipeline comercial</span>
+          <span class="sv-tag purple">Historial de conversaciones</span>
+          <span class="sv-tag purple">Centralización de canales</span>
+          <span class="sv-tag purple">Paneles de métricas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-section-cta" data-reveal data-delay="4">
+      <p>¿Tu equipo pierde tiempo respondiendo mensajes repetitivos? <strong>Lo automatizamos en menos de 2 semanas.</strong></p>
+      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
+        Solicitar Diagnóstico <span class="dot"></span>
       </a>
     </div>
-  </aside>
+  </div>
+</section>
 
-  <!-- CONTENT -->
-  <div class="gl-services-content">
+<!-- ── DIVIDER ── -->
+<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(124,58,237,0.3),rgba(59,130,246,0.3),transparent);"></div>
 
-    <!-- ── SERVICIO 1: SISTEMA COMERCIAL INTELIGENTE ── -->
-    <section class="gl-service-section" id="comercial" data-anim="up">
+<!-- ═══════════════════════
+     SERVICIO 02
+═══════════════════════════ -->
+<section class="sv-section blue" id="automatizacion">
+  <div class="sv-glow"></div>
+  <div class="sv-bg-num">02</div>
 
-      <div class="gl-service-icon">
-        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="28" cy="28" r="27" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
-          <circle cx="28" cy="28" r="18" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="9"  stroke="rgba(167,139,250,0.5)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="4"  fill="rgba(167,139,250,0.8)"/>
-        </svg>
+  <div class="sv-shape" style="width:450px;height:110px;top:8%;left:-5%;opacity:0.3;--sv-transform-a:translate(0,0) rotate(10deg);--sv-transform-b:translate(25px,15px) rotate(14deg);animation-duration:24s;border-color:rgba(96,165,250,0.12);"></div>
+  <div class="sv-shape" style="width:280px;height:75px;bottom:20%;right:8%;opacity:0.22;--sv-transform-a:translate(0,0) rotate(-18deg);--sv-transform-b:translate(-15px,12px) rotate(-14deg);animation-duration:18s;border-color:rgba(96,165,250,0.1);"></div>
+
+  <div class="sv-inner">
+    <div class="sv-header">
+      <div class="sv-header-left">
+        <div class="sv-num-label" data-reveal data-delay="1">
+          <span>Servicio 02</span>
+        </div>
+        <h2 class="sv-section-title" data-reveal data-delay="2">
+          <span class="g-blue">Automatización</span><br/>de Ventas y<br/>Operaciones
+        </h2>
+        <p class="sv-section-sub" data-reveal data-delay="3">
+          Tu empresa funciona<br/>incluso cuando nadie está trabajando.
+        </p>
       </div>
-
-      <p class="gl-service-num">Servicio 01</p>
-      <h2 class="gl-service-title"><span class="gl-gradient-purple">Sistema Comercial</span> Inteligente</h2>
-      <p class="gl-service-subtitle">Ningún lead se pierde. Toda la empresa trabaja sobre un solo sistema.</p>
-
-      <p class="gl-service-desc">
-        Construimos la infraestructura completa de captación y gestión de clientes de tu empresa. Asistentes con inteligencia artificial que atienden, califican y organizan cada oportunidad de negocio — automáticamente, en todos tus canales, las 24 horas.
-      </p>
-
-      <div class="gl-service-visual purple-visual">
-        <div class="gl-service-visual-inner">
-          <div class="big-num">01</div>
-          <div class="gl-visual-label">Captación · Atención · CRM · Agendamiento</div>
+      <div class="sv-header-right" data-reveal="right" data-delay="2">
+        <p class="sv-section-desc">
+          Eliminamos el trabajo repetitivo de tu equipo y automatizamos cada proceso comercial. Desde el seguimiento de un presupuesto hasta la gestión de documentos internos — todo funciona solo, sin errores, sin retrasos.
+        </p>
+        <div class="sv-result-box blue">
+          <span class="sv-result-icon">✦</span>
+          <p><strong>El resultado:</strong> tu empresa trabaja mientras tú no estás. Cada proceso que hoy requiere intervención humana se convierte en un flujo automático — rápido, sin errores y completamente escalable.</p>
         </div>
       </div>
+    </div>
 
-      <div class="gl-tags-wrap">
-        <div class="gl-tags-list">
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asistente IA para WhatsApp</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asistente IA para Instagram</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Chat web inteligente</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Bots de voz con IA</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Atención automática 24/7</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Respuestas automáticas</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Captura automática de leads</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Formularios inteligentes</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Landing Pages</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Páginas web dinámicas</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Agendamiento automático</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Confirmación de citas</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Recordatorios de citas</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Reagendamiento automático</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Calificación automática de leads</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Asignación al comercial adecuado</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>CRM organizado</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Gestión completa de clientes</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Pipeline comercial</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Historial de conversaciones</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Centralización de canales</span>
-          <span class="gl-tag purple"><span class="gl-tag-dot"></span>Paneles de métricas</span>
+    <div class="sv-tags-section" data-reveal data-delay="3">
+      <div class="sv-tags-header">Lo que automatizamos</div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Seguimientos & Ventas</div>
+        <div class="sv-tags">
+          <span class="sv-tag blue">Seguimientos automáticos por WhatsApp</span>
+          <span class="sv-tag blue">Seguimientos automáticos por email</span>
+          <span class="sv-tag blue">Secuencias inteligentes</span>
+          <span class="sv-tag blue">Nutrición automática</span>
+          <span class="sv-tag blue">Recuperación de oportunidades perdidas</span>
+          <span class="sv-tag blue">Recuperación de presupuestos no aceptados</span>
         </div>
       </div>
-
-      <div class="gl-service-cta-box">
-        <p><strong>El resultado:</strong> ningún lead se pierde, ninguna cita se olvida y toda tu empresa trabaja sobre un sistema organizado. Tu equipo deja de perseguir clientes — el sistema los atrae, los clasifica y los entrega listos para cerrar.</p>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Propuestas & Documentos</div>
+        <div class="sv-tags">
+          <span class="sv-tag blue">Automatización de propuestas</span>
+          <span class="sv-tag blue">Automatización de cotizaciones</span>
+          <span class="sv-tag blue">Automatización de pagos</span>
+          <span class="sv-tag blue">Automatización documental</span>
+          <span class="sv-tag blue">Automatización administrativa</span>
+          <span class="sv-tag blue">Automatización del onboarding</span>
+        </div>
       </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Operaciones & Flujos</div>
+        <div class="sv-tags">
+          <span class="sv-tag blue">Recordatorios internos</span>
+          <span class="sv-tag blue">Automatización de tareas</span>
+          <span class="sv-tag blue">Automatizaciones personalizadas</span>
+          <span class="sv-tag blue">Integraciones entre plataformas</span>
+          <span class="sv-tag blue">Flujos completamente a medida</span>
+          <span class="sv-tag blue">Automatización de procesos internos</span>
+        </div>
+      </div>
+    </div>
 
+    <div class="sv-section-cta" data-reveal data-delay="4">
+      <p>¿Cuántas horas pierde tu equipo en tareas repetitivas cada semana? <strong>Esas horas se recuperan con automatización.</strong></p>
       <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
         Solicitar Diagnóstico <span class="dot"></span>
-      </a>
-    </section>
-
-    <!-- ── SERVICIO 2: AUTOMATIZACIÓN DE VENTAS Y OPERACIONES ── -->
-    <section class="gl-service-section" id="automatizacion" data-anim="up">
-
-      <div class="gl-service-icon">
-        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="4" width="48" height="48" rx="8" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
-          <path d="M16 28 L22 22 L28 26 L34 18 L40 24" stroke="rgba(96,165,250,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="16" cy="28" r="2.5" fill="rgba(96,165,250,0.6)"/>
-          <circle cx="28" cy="26" r="2.5" fill="rgba(96,165,250,0.6)"/>
-          <circle cx="40" cy="24" r="2.5" fill="rgba(96,165,250,0.9)"/>
-        </svg>
-      </div>
-
-      <p class="gl-service-num">Servicio 02</p>
-      <h2 class="gl-service-title"><span class="gl-gradient-blue">Automatización</span> de Ventas y Operaciones</h2>
-      <p class="gl-service-subtitle">Tu empresa funciona incluso cuando nadie está trabajando.</p>
-
-      <p class="gl-service-desc">
-        Eliminamos el trabajo repetitivo de tu equipo y automatizamos cada proceso comercial y operativo de tu negocio. Desde el seguimiento de un presupuesto hasta la gestión de documentos internos — todo funciona solo, sin errores, sin retrasos.
-      </p>
-
-      <div class="gl-service-visual blue-visual">
-        <div class="gl-service-visual-inner">
-          <div class="big-num">02</div>
-          <div class="gl-visual-label">Seguimiento · Propuestas · Procesos · Integraciones</div>
-        </div>
-      </div>
-
-      <div class="gl-tags-wrap">
-        <div class="gl-tags-list">
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Seguimientos automáticos por WhatsApp</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Seguimientos automáticos por email</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Secuencias inteligentes</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Nutrición automática</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recuperación de oportunidades perdidas</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recuperación de presupuestos no aceptados</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de propuestas</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de cotizaciones</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de pagos</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización documental</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización administrativa</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización del onboarding</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Recordatorios internos</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de tareas</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatizaciones personalizadas</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Integraciones entre plataformas</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Flujos completamente a medida</span>
-          <span class="gl-tag blue"><span class="gl-tag-dot"></span>Automatización de procesos internos</span>
-        </div>
-      </div>
-
-      <div class="gl-service-cta-box">
-        <p><strong>El resultado:</strong> tu empresa trabaja mientras tú no estás. Cada proceso que hoy requiere intervención humana se convierte en un flujo automático — rápido, sin errores y completamente escalable.</p>
-      </div>
-
-      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
-        Solicitar Diagnóstico <span class="dot"></span>
-      </a>
-    </section>
-
-    <!-- ── SERVICIO 3: CRECIMIENTO, MARKETING Y FIDELIZACIÓN ── -->
-    <section class="gl-service-section" id="crecimiento" data-anim="up">
-
-      <div class="gl-service-icon">
-        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M28 8 L48 18 L48 38 L28 48 L8 38 L8 18 Z" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" fill="none"/>
-          <path d="M28 18 L40 24 L40 34 L28 40 L16 34 L16 24 Z" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.5)" stroke-width="1"/>
-          <circle cx="28" cy="28" r="5" fill="rgba(52,211,153,0.8)"/>
-        </svg>
-      </div>
-
-      <p class="gl-service-num">Servicio 03</p>
-      <h2 class="gl-service-title"><span class="gl-gradient-green">Crecimiento,</span> Marketing y Fidelización</h2>
-      <p class="gl-service-subtitle">Generamos más tráfico cualificado. Nuestro sistema lo convierte en ventas automáticamente.</p>
-
-      <p class="gl-service-desc">
-        No solo automatizamos — también hacemos crecer tu negocio. Diseñamos la estrategia para atraer más clientes ideales, construimos las campañas para captarlos y montamos los sistemas para que vuelvan a comprar una y otra vez.
-      </p>
-
-      <div class="gl-service-visual green-visual">
-        <div class="gl-service-visual-inner">
-          <div class="big-num">03</div>
-          <div class="gl-visual-label">Estrategia · Marketing · Fidelización</div>
-        </div>
-      </div>
-
-      <div class="gl-subcategories">
-        <div>
-          <div class="gl-subcat-label">Estrategia</div>
-          <div class="gl-tags-list">
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategias de captación</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Embudos de conversión</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategia comercial</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategia de automatización</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Optimización del recorrido del cliente</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Consultoría para escalar</span>
-          </div>
-        </div>
-        <div>
-          <div class="gl-subcat-label">Marketing</div>
-          <div class="gl-tags-list">
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de Influencer Marketing</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Estrategias de contenido viral</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas en redes sociales</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Publicación automática en redes</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Email Marketing</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>WhatsApp Marketing</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de reactivación</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Campañas de recompra</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Cross Selling</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Up Selling</span>
-          </div>
-        </div>
-        <div>
-          <div class="gl-subcat-label">Fidelización</div>
-          <div class="gl-tags-list">
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Programas de fidelización</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Sistemas de puntos</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Membresías</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Seguimiento postventa</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Solicitud automática de reseñas</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Encuestas de satisfacción</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Recuperación de clientes inactivos</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Recordatorios de renovación</span>
-            <span class="gl-tag green"><span class="gl-tag-dot"></span>Automatización de comunicación</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="gl-service-cta-box">
-        <p><strong>El resultado:</strong> más clientes cualificados entrando al sistema, más ventas cerrándose de forma automática y más clientes existentes comprando de nuevo. Un negocio que crece sin depender de esfuerzo manual.</p>
-      </div>
-
-      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
-        Solicitar Diagnóstico <span class="dot"></span>
-      </a>
-    </section>
-
-    <!-- ── SOLUCIONES A MEDIDA ── -->
-    <section class="gl-custom-section" id="medida" data-anim="up">
-
-      <div class="gl-service-icon">
-        <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 46 L10 28 L20 18 L30 24 L46 10" stroke="rgba(251,191,36,0.5)" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="8" y="8" width="12" height="12" rx="3" stroke="rgba(251,191,36,0.4)" stroke-width="1.2" fill="rgba(251,191,36,0.1)"/>
-          <rect x="36" y="36" width="12" height="12" rx="3" stroke="rgba(251,191,36,0.4)" stroke-width="1.2" fill="rgba(251,191,36,0.1)"/>
-          <circle cx="30" cy="24" r="4" fill="rgba(251,191,36,0.7)"/>
-        </svg>
-      </div>
-
-      <p class="gl-service-num">Servicio 04</p>
-      <h2 class="gl-service-title"><span class="gl-gradient-amber">Soluciones</span> a Medida</h2>
-      <p class="gl-service-subtitle">Cuando tu negocio necesita algo que no existe, lo construimos.</p>
-
-      <p class="gl-service-desc">
-        Desarrollamos software empresarial personalizado para empresas que requieren herramientas específicas. Si un proceso de tu negocio no encaja en ninguna solución estándar del mercado, creamos la herramienta exacta que necesitas.
-      </p>
-
-      <div class="gl-service-visual amber-visual">
-        <div class="gl-service-visual-inner">
-          <div class="big-num">04</div>
-          <div class="gl-visual-label">Software · Plataformas · Agentes IA · Integraciones</div>
-        </div>
-      </div>
-
-      <div class="gl-tags-wrap">
-        <div class="gl-tags-list">
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Aplicaciones web</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Plataformas internas</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Portales de clientes</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Dashboards personalizados</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Sistemas de gestión</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Herramientas comerciales</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Agentes de IA</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Bases de conocimiento inteligentes</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Integraciones mediante API</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Automatizaciones completamente personalizadas</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Herramientas internas</span>
-          <span class="gl-tag amber"><span class="gl-tag-dot"></span>Software empresarial a medida</span>
-        </div>
-      </div>
-
-      <div class="gl-service-cta-box">
-        <p><strong>El resultado:</strong> una herramienta construida exactamente para cómo funciona tu empresa — no adaptada, sino diseñada desde cero para encajar en tus procesos y escalar con tu negocio.</p>
-      </div>
-
-      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
-        Hablar de tu proyecto <span class="dot"></span>
-      </a>
-    </section>
-
-  </div><!-- /gl-services-content -->
-</div><!-- /gl-services-wrapper -->
-
-<!-- TICKER -->
-<div data-ticker style="padding:0.8rem 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);background:rgba(0,0,0,0.2);"></div>
-
-<!-- FOOTER -->
-<footer class="gl-footer">
-  <div class="gl-footer-inner" data-anim="up">
-    <h2>¿Listo para construir el sistema que <span class="gl-gradient">tu empresa necesita?</span></h2>
-    <p>Analizamos tu operación, identificamos los cuellos de botella y diseñamos la arquitectura exacta de automatización e IA para que tu negocio escale sin depender de más personas ni más horas.</p>
-    <p>Un diagnóstico estratégico, sin compromiso.</p>
-    <div class="gl-footer-buttons">
-      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
-        SOLICITAR DIAGNÓSTICO <span class="dot"></span>
       </a>
     </div>
-    <div class="gl-footer-bottom">
-      <a href="/" class="gl-footer-logo">Glowlabs</a>
-      <span class="gl-copyright">GlowLabs &copy; 2025. Todos los derechos reservados.</span>
+  </div>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,0.3),rgba(5,150,105,0.3),transparent);"></div>
+
+<!-- ═══════════════════════
+     SERVICIO 03
+═══════════════════════════ -->
+<section class="sv-section green" id="crecimiento">
+  <div class="sv-glow"></div>
+  <div class="sv-bg-num">03</div>
+
+  <div class="sv-shape" style="width:380px;height:95px;top:15%;right:-3%;opacity:0.28;--sv-transform-a:translate(0,0) rotate(-6deg);--sv-transform-b:translate(-18px,18px) rotate(-2deg);animation-duration:22s;border-color:rgba(52,211,153,0.1);"></div>
+  <div class="sv-shape" style="width:300px;height:80px;bottom:25%;left:5%;opacity:0.22;--sv-transform-a:translate(0,0) rotate(22deg);--sv-transform-b:translate(12px,-14px) rotate(26deg);animation-duration:17s;border-color:rgba(52,211,153,0.08);"></div>
+
+  <div class="sv-inner">
+    <div class="sv-header">
+      <div class="sv-header-left">
+        <div class="sv-num-label" data-reveal data-delay="1">
+          <span>Servicio 03</span>
+        </div>
+        <h2 class="sv-section-title" data-reveal data-delay="2">
+          <span class="g-green">Crecimiento,</span><br/>Marketing y<br/>Fidelización
+        </h2>
+        <p class="sv-section-sub" data-reveal data-delay="3">
+          Generamos más tráfico cualificado.<br/>El sistema lo convierte en ventas, solo.
+        </p>
+      </div>
+      <div class="sv-header-right" data-reveal="right" data-delay="2">
+        <p class="sv-section-desc">
+          No solo automatizamos — también hacemos crecer tu negocio. Diseñamos la estrategia para atraer más clientes ideales, construimos las campañas para captarlos y montamos los sistemas para que vuelvan a comprar una y otra vez.
+        </p>
+        <div class="sv-result-box green">
+          <span class="sv-result-icon">✦</span>
+          <p><strong>El resultado:</strong> más clientes cualificados entrando al sistema, más ventas cerrándose automáticamente y más clientes existentes comprando de nuevo. Un negocio que crece sin depender de esfuerzo manual.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-tags-section" data-reveal data-delay="3">
+      <div class="sv-tags-header">Estrategia · Marketing · Fidelización</div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Estrategia</div>
+        <div class="sv-tags">
+          <span class="sv-tag green">Estrategias de captación</span>
+          <span class="sv-tag green">Embudos de conversión</span>
+          <span class="sv-tag green">Estrategia comercial</span>
+          <span class="sv-tag green">Estrategia de automatización</span>
+          <span class="sv-tag green">Optimización del recorrido del cliente</span>
+          <span class="sv-tag green">Consultoría para escalar</span>
+        </div>
+      </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Marketing</div>
+        <div class="sv-tags">
+          <span class="sv-tag green">Campañas de Influencer Marketing</span>
+          <span class="sv-tag green">Estrategias de contenido viral</span>
+          <span class="sv-tag green">Campañas en redes sociales</span>
+          <span class="sv-tag green">Publicación automática en redes</span>
+          <span class="sv-tag green">Email Marketing</span>
+          <span class="sv-tag green">WhatsApp Marketing</span>
+          <span class="sv-tag green">Campañas de reactivación</span>
+          <span class="sv-tag green">Campañas de recompra</span>
+          <span class="sv-tag green">Cross Selling</span>
+          <span class="sv-tag green">Up Selling</span>
+        </div>
+      </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Fidelización</div>
+        <div class="sv-tags">
+          <span class="sv-tag green">Programas de fidelización</span>
+          <span class="sv-tag green">Sistemas de puntos</span>
+          <span class="sv-tag green">Membresías</span>
+          <span class="sv-tag green">Seguimiento postventa</span>
+          <span class="sv-tag green">Solicitud automática de reseñas</span>
+          <span class="sv-tag green">Encuestas de satisfacción</span>
+          <span class="sv-tag green">Recuperación de clientes inactivos</span>
+          <span class="sv-tag green">Recordatorios de renovación</span>
+          <span class="sv-tag green">Automatización de comunicación</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-section-cta" data-reveal data-delay="4">
+      <p>¿Tienes clientes que compraron una vez y no volvieron? <strong>Los recuperamos con sistemas automáticos de reactivación.</strong></p>
+      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
+        Solicitar Diagnóstico <span class="dot"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(5,150,105,0.3),rgba(245,158,11,0.3),transparent);"></div>
+
+<!-- ═══════════════════════
+     SERVICIO 04
+═══════════════════════════ -->
+<section class="sv-section amber" id="medida">
+  <div class="sv-glow"></div>
+  <div class="sv-bg-num">04</div>
+
+  <div class="sv-shape" style="width:420px;height:105px;top:12%;left:-4%;opacity:0.28;--sv-transform-a:translate(0,0) rotate(12deg);--sv-transform-b:translate(20px,18px) rotate(16deg);animation-duration:21s;border-color:rgba(251,191,36,0.1);"></div>
+  <div class="sv-shape" style="width:260px;height:72px;bottom:18%;right:6%;opacity:0.2;--sv-transform-a:translate(0,0) rotate(-20deg);--sv-transform-b:translate(-12px,10px) rotate(-16deg);animation-duration:19s;border-color:rgba(251,191,36,0.08);"></div>
+
+  <div class="sv-inner">
+    <div class="sv-header">
+      <div class="sv-header-left">
+        <div class="sv-num-label" data-reveal data-delay="1">
+          <span>Servicio 04</span>
+        </div>
+        <h2 class="sv-section-title" data-reveal data-delay="2">
+          <span class="g-amber">Soluciones</span><br/>a Medida
+        </h2>
+        <p class="sv-section-sub" data-reveal data-delay="3">
+          Cuando tu negocio necesita algo<br/>que no existe, lo construimos.
+        </p>
+      </div>
+      <div class="sv-header-right" data-reveal="right" data-delay="2">
+        <p class="sv-section-desc">
+          Desarrollamos software empresarial personalizado para empresas que requieren herramientas específicas. Si un proceso de tu negocio no encaja en ninguna solución estándar del mercado, creamos la herramienta exacta que necesitas.
+        </p>
+        <div class="sv-result-box amber">
+          <span class="sv-result-icon">✦</span>
+          <p><strong>El resultado:</strong> una herramienta propia que ningún competidor tiene — construida exactamente para tu operación, que escala contigo y elimina las fricciones que ningún software genérico resuelve.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-tags-section" data-reveal data-delay="3">
+      <div class="sv-tags-header">Lo que desarrollamos</div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Software & Plataformas</div>
+        <div class="sv-tags">
+          <span class="sv-tag amber">Aplicaciones web</span>
+          <span class="sv-tag amber">Plataformas internas</span>
+          <span class="sv-tag amber">Portales de clientes</span>
+          <span class="sv-tag amber">Dashboards personalizados</span>
+          <span class="sv-tag amber">Sistemas de gestión</span>
+          <span class="sv-tag amber">Herramientas comerciales</span>
+          <span class="sv-tag amber">Herramientas internas</span>
+          <span class="sv-tag amber">Software empresarial a medida</span>
+        </div>
+      </div>
+      <div class="sv-tags-group">
+        <div class="sv-tags-group-label">Inteligencia Artificial</div>
+        <div class="sv-tags">
+          <span class="sv-tag amber">Agentes de IA</span>
+          <span class="sv-tag amber">Bases de conocimiento inteligentes</span>
+          <span class="sv-tag amber">Integraciones mediante API</span>
+          <span class="sv-tag amber">Automatizaciones completamente personalizadas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sv-section-cta" data-reveal data-delay="4">
+      <p>¿Tienes un proceso único que ningún software del mercado resuelve? <strong>Cuéntanoslo — lo construimos.</strong></p>
+      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn">
+        Hablemos de tu proyecto <span class="dot"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     FOOTER CTA
+═══════════════════════════ -->
+<footer class="sv-footer">
+  <div class="sv-footer-inner">
+    <p class="sv-footer-eyebrow" data-reveal>Siguiente paso</p>
+    <h2 data-reveal data-delay="1">
+      ¿Listo para instalar el<br/><span class="g-main">sistema operativo</span><br/>de tu empresa?
+    </h2>
+    <p data-reveal data-delay="2">
+      30 minutos de diagnóstico gratuito. Analizamos tu operación, detectamos los cuellos de botella y te decimos exactamente qué se puede automatizar — sin compromiso.
+    </p>
+    <div class="sv-footer-btns" data-reveal data-delay="3">
+      <a href="https://calendly.com/mariamontillamuelle/30min" target="_blank" class="gl-btn-solid">
+        Solicitar Diagnóstico Gratuito →
+      </a>
+      <a href="/calculadora" class="gl-btn">
+        Calcular mi ROI <span class="dot"></span>
+      </a>
+    </div>
+    <div class="sv-footer-bottom">
+      <a href="/" class="sv-footer-logo">Glowlabs</a>
+      <nav class="sv-footer-nav">
+        <a href="/">Inicio</a>
+        <a href="/about">About</a>
+        <a href="/casos">Casos de Éxito</a>
+        <a href="/recursos">Recursos</a>
+        <a href="/calculadora">Calculadora</a>
+      </nav>
+      <p class="sv-footer-copy">© 2025 GlowLabs</p>
     </div>
   </div>
 </footer>
 
-<script src="https://cdn.prod.website-files.com/64bfa5eec3353671101c9bd1/js/adsorb.b8fc4c0df.js" crossorigin="anonymous"></script>
-<script src="/js/animations.js"></script>
+<!-- ── WHATSAPP ── -->
+<a href="https://wa.me/34617927277?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20GlowLabs%20%F0%9F%91%8B" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>¿Hablamos?</span>
+</a>
+
+<!-- ── CHAT AI ── -->
 <script src="/js/chat.js" defer></script>
 
 <script>
-(function() {
-  const sections = ['comercial', 'automatizacion', 'crecimiento', 'medida'];
-  const items = document.querySelectorAll('.gl-sidebar-item');
+// ═══════════════════════════════════════
+// SCROLL PROGRESS BAR
+// ═══════════════════════════════════════
+const progressBar = document.getElementById('sv-progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progressBar.style.width = Math.min(pct, 100) + '%';
+}, { passive: true });
 
-  function updateActive() {
-    const scrollY = window.scrollY + window.innerHeight * 0.4;
-    let current = sections[0];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.offsetTop <= scrollY) current = id;
+// ═══════════════════════════════════════
+// INTERSECTION OBSERVER — REVEAL
+// ═══════════════════════════════════════
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('revealed');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+// ═══════════════════════════════════════
+// SECTION GLOW — in-view class
+// ═══════════════════════════════════════
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in-view');
+    else e.target.classList.remove('in-view');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.sv-section').forEach(s => sectionObs.observe(s));
+
+// ═══════════════════════════════════════
+// STAGGER TAGS on scroll
+// ═══════════════════════════════════════
+const tagObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const tags = e.target.querySelectorAll('.sv-tag');
+    tags.forEach((tag, i) => {
+      setTimeout(() => tag.classList.add('revealed'), i * 55);
     });
-    items.forEach(item => {
-      item.classList.toggle('active', item.dataset.section === current);
-    });
+    tagObs.unobserve(e.target);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.sv-tags-section').forEach(s => tagObs.observe(s));
+
+// ═══════════════════════════════════════
+// COUNTER ANIMATION
+// ═══════════════════════════════════════
+function animateCounter(el, target, suffix = '') {
+  const start = performance.now();
+  const duration = 1600;
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+  function update(now) {
+    const t = Math.min((now - start) / duration, 1);
+    el.textContent = Math.round(easeOut(t) * target) + suffix;
+    if (t < 1) requestAnimationFrame(update);
   }
+  requestAnimationFrame(update);
+}
 
-  window.addEventListener('scroll', updateActive, { passive: true });
-  updateActive();
-})();
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const target = parseInt(e.target.dataset.counter);
+    const suffix = e.target.dataset.suffix || (target === 100 ? '+' : target === 30 ? '+' : '');
+    animateCounter(e.target, target, suffix);
+    counterObs.unobserve(e.target);
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-counter]').forEach(el => counterObs.observe(el));
+
+// Fix counter suffix
+document.querySelectorAll('[data-counter]').forEach(el => {
+  const val = parseInt(el.dataset.counter);
+  if (val === 100 || val === 30) el.dataset.suffix = '+';
+});
+
+// ═══════════════════════════════════════
+// SIDEBAR SCROLL SPY
+// ═══════════════════════════════════════
+const spyItems = document.querySelectorAll('.sv-spy-item');
+const sections = ['comercial', 'automatizacion', 'crecimiento', 'medida']
+  .map(id => document.getElementById(id)).filter(Boolean);
+
+const spyObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      spyItems.forEach(item => item.classList.remove('active'));
+      const active = document.querySelector(`.sv-spy-item[data-spy="${e.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -40% 0px' });
+
+sections.forEach(s => spyObs.observe(s));
+
+// ═══════════════════════════════════════
+// HERO reveal on load
+// ═══════════════════════════════════════
+window.addEventListener('load', () => {
+  document.querySelectorAll('.sv-hero [data-reveal]').forEach(el => {
+    setTimeout(() => el.classList.add('revealed'),
+      (parseInt(el.dataset.delay || 0)) * 150);
+  });
+});
 </script>
 
-<!-- WhatsApp Flotante -->
-<a href="https://wa.me/34617927277?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20GlowLabs%20%F0%9F%91%8B" target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  <span class="wa-label">¿Hablamos?</span>
-</a>
-<style>
-.wa-float {
-  position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
-  display: flex; align-items: center; gap: 0.6rem;
-  background: #25D366; color: #fff; border-radius: 9999px;
-  padding: 0.8rem 1.2rem 0.8rem 0.9rem; text-decoration: none;
-  font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600;
-  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: waPulse 2.5s ease-in-out infinite;
-}
-.wa-float:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 32px rgba(37,211,102,0.55); animation: none; }
-.wa-float svg { width: 22px; height: 22px; flex-shrink: 0; }
-@keyframes waPulse {
-  0%,100% { box-shadow: 0 4px 24px rgba(37,211,102,0.4); }
-  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.08); }
-}
-@media (max-width: 600px) { .wa-float { padding: 0.8rem; bottom: 1.5rem; right: 1.5rem; } .wa-label { display: none; } }
-</style>
 </body>
 </html>
